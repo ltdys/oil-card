@@ -1,0 +1,19 @@
+@import './base/index';
+@import './var';
+@import './word';
+
+html,body{
+  height: 100%;
+}
+body {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-family: $font-family-base;
+  font-size: 16px;
+  line-height: 1.4;
+  height: 100%;
+  overflow: hidden;
+  -webkit-touch-callout: none;
+  -webkit-user-select:  none;
+}

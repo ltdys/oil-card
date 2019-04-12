@@ -1,0 +1,73 @@
+.block {
+  display: block;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.none {
+  display: none
+}
+
+.clear {
+  clear: both;
+}
+
+.fl {
+  float: left;
+}
+
+.fr {
+  float: right;
+}
+
+.tl {
+  text-align: left;
+}
+
+.tr {
+  text-align: right;
+}
+
+.tc {
+  text-align: center;
+}
+
+.cf {
+  zoom: 1;
+  &:before,
+  &:after {
+    content: "";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.h-150 {
+  height: 150px;
+}
+
+chrome scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  min-height: 20px;
+  background: rgba($c00, 0.5);
+}
+
+::-webkit-scrollbar-track-piece {
+  background: rgba($c00, 0.2);
+}
