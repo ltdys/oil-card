@@ -7,15 +7,17 @@
     </van-swipe>
     <div class="page-home-middle">
       <home-message></home-message>
+      <home-nav></home-nav>
     </div>
   </div>
 </template>
 
 <script>
   import homeMessage from './components/message'
+  import homeNav from './components/nav'
   export default {
     components: {
-      homeMessage
+      homeMessage, homeNav
     },
 
     data () {
