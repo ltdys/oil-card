@@ -1,6 +1,6 @@
 <template>
   <com-page class="my">
-    <com-header title="已关注粉丝" slot="header"></com-header>
+    <com-header title="已关注粉丝" is-back slot="header"></com-header>
     
   </com-page>
 </template>

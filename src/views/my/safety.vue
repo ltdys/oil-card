@@ -1,6 +1,6 @@
 <template>
   <com-page class="my">
-    <com-header title="实名认证" slot="header"></com-header>
+    <com-header title="实名认证" is-back slot="header"></com-header>
     
   </com-page>
 </template>

@@ -1,6 +1,6 @@
 <template>
   <com-page class="my">
-    <com-header title="个人信息" slot="header"></com-header>
+    <com-header title="个人信息" is-back slot="header"></com-header>
     
   </com-page>
 </template>

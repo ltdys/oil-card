@@ -1,6 +1,6 @@
 <template>
   <com-page class="my">
-    <com-header title="个人钱包" slot="header"></com-header>
+    <com-header title="个人钱包" is-back slot="header"></com-header>
     
   </com-page>
 </template>

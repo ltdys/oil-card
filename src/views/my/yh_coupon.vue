@@ -1,6 +1,6 @@
 <template>
   <com-page class="my">
-    <com-header title="优惠券" slot="header"></com-header>
+    <com-header title="优惠券" is-back slot="header"></com-header>
     
   </com-page>
 </template>
