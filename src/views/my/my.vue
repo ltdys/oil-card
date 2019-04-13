@@ -9,7 +9,7 @@
     <div class="blank-10"></div>
     <div class="my_user">个人服务</div>
     <div class="my_serve">
-      <div v-for="(item, index) in imgs" :key="index">
+      <div v-for="(item, index) in imgs" :key="index" @click="jumpPath(item)">
         <template v-if="Object.keys(item).length != 0">
           <img class="my_serve__img" :src="item.img" alt="">
           <div>{{ item.text }}</div>
@@ -30,31 +30,45 @@ export default {
       imgs: [
         {
           img: 'static/images/icon/user.png',
-          text: '个人信息'
+          text: '个人信息',
+          path: '/my/info'
         }, {
           img: 'static/images/icon/safety.png',
-          text: '实名认证'
+          text: '实名认证',
+          path: '/my/safety'
         }, {
           img: 'static/images/icon/wallet.png',
-          text: '个人钱包'
+          text: '个人钱包',
+          path: '/my/wallet'
         }, {
           img: 'static/images/icon/record.png',
-          text: '充值记录'
+          text: '充值记录',
+          path: '/my/record'
         }, {
-          img: 'static/images/icon/code.png',
-          text: '二维码推广'
+          img: 'static/images/icon/rq_code.png',
+          text: '二维码推广',
+          path: '/my/rq_code'
         }, {
           img: 'static/images/icon/collect.png',
-          text: '已关注粉丝'
+          text: '已关注粉丝',
+          path: '/my/follow_fans'
         }, {
           img: 'static/images/icon/coupon.png',
-          text: '优惠券'
+          text: '优惠券',
+          path: '/my/yh_coupon'
         }, {
           img: 'static/images/icon/integral.png',
-          text: '积分'
+          text: '积分',
+          path: '/my/integral'
         }, {}
       ]
     }
+  },
+  methods: {
+    jumpPath (item) { // 跳转子项页面
+      let self = this;
+      self.$router.push(item.path)
+    },
   }
 }
 </script>
