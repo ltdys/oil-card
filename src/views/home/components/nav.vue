@@ -14,7 +14,7 @@
     </div>
     <div>
       <van-icon name="balance-o"/>
-      <span>油卡挂失1</span>
+      <span>油卡挂失</span>
     </div>
     <div>
       <van-icon name="refund-o"/>
