@@ -19,4 +19,5 @@ selenium-debug.log
 
 # Web directories and files
 node_modules
+dist
 package-lock.json
