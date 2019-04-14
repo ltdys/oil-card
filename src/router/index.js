@@ -53,6 +53,34 @@ export const routes = [{
     path: '/my/integral', //积分
     component: () => import('@/views/my/integral.vue')
   },
+  {
+    path: '/service/appointment', //预约办卡
+    component: () => import('@/views/service/appointment.vue')
+  },
+  {
+    path: '/service/binding', //油卡绑定
+    component: () => import('@/views/service/binding.vue')
+  },
+  {
+    path: '/service/binding', //油卡绑定
+    component: () => import('@/views/service/binding.vue')
+  },
+  {
+    path: '/service/recharge', //油卡充值
+    component: () => import('@/views/service/recharge.vue')
+  },
+  {
+    path: '/service/loss_report', //油卡挂失
+    component: () => import('@/views/service/loss_report.vue')
+  },
+  {
+    path: '/service/withdraw', //申请退卡
+    component: () => import('@/views/service/withdraw.vue')
+  },
+  {
+    path: '/service/problem', //常见问题
+    component: () => import('@/views/service/problem.vue')
+  },
 ]
 
 export default new Router({
