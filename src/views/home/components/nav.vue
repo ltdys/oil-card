@@ -50,6 +50,7 @@ export default {
       flex-wrap: wrap;
       box-sizing: border-box;
       justify-content: space-between;
+      font-size: 14px;
       >div {
         width: calc(50% - 2.5px);
         height: 120px;
