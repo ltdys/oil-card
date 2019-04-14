@@ -13,7 +13,7 @@ export default {
     return {
       navList: [{
         img: 'static/images/icon/appointment.png',
-        text: '预约办卡',
+        text: '预约办卡1',
         path: '/service/appointment'
       }, {
         img: 'static/images/icon/binding.png',
