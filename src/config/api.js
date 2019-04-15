@@ -3,7 +3,8 @@ import axios from 'axios'
 let cancel ,promiseArr = {}
 const CancelToken = axios.CancelToken
 
-axios.defaults.baseURL = ''
+// axios.defaults.baseURL = ''
+axios.defaults.baseURL = process.env.BASE_API
 
 //设置默认请求头
 axios.defaults.headers = {
