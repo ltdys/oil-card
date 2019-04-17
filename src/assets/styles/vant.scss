@@ -1,7 +1,24 @@
-$color-primary: #1989fa;
+$color-primary: #55ADFC;
 
 body {
   .van-nav-bar .van-icon {
     color: #333!important;
+  }
+  .van-button--primary {
+    background-color: $color-primary;
+    border: 2px solid $color-primary;
+  }
+  .van-button--primary.van-button--plain {
+    border: 1px solid $color-primary;
+    color: $color-primary;
+    background-color: #fff;
+  }
+  .submit_buttons {
+    padding: 0 14.5px;
+    .van-button--primary {
+      width: 346px;
+      height: 52px;
+      margin-top: 64px;
+    }
   }
 }
