@@ -61,7 +61,8 @@ export default {
         align-items: center;
         margin-bottom: 5px;
         >img {
-          width: 30px;
+          width: 56px;
+          height: 52px;
           margin-bottom: 10px;
         }
       }

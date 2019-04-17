@@ -13,7 +13,7 @@
       required
       clearable
       disabled
-      label="快递选择"
+      label="选择快递"
       right-icon="arrow"
       @click-right-icon="expressChange">
     </van-field>
@@ -25,7 +25,7 @@
       placeholder="输入收件人姓名">
     </van-field>
     <van-field
-      type="tel"
+      type="number"
       v-model="formData.phone"
       required
       clearable
