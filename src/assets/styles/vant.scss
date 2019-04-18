@@ -1,6 +1,9 @@
 $color-primary: #55ADFC;
 
 body {
+  .van-nav-bar {
+    background-color: $cf9;
+  }
   .van-nav-bar .van-icon {
     color: #333!important;
   }

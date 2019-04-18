@@ -19,11 +19,13 @@ import {
   RadioGroup,
   Radio,
   Actionsheet,
-  GoodsAction, GoodsActionMiniBtn,
+  GoodsAction, GoodsActionMiniBtn,GoodsActionBigBtn,
   DatetimePicker,
   Uploader,
   Loading,
-  Picker
+  Picker,
+  CouponCell,
+  CouponList
 } from 'vant'
 
 const components = [
@@ -45,11 +47,13 @@ const components = [
   Swipe, SwipeItem,
   RadioGroup, Radio,
   Actionsheet,
-  GoodsAction, GoodsActionMiniBtn,
+  GoodsAction, GoodsActionMiniBtn,GoodsActionBigBtn,
   DatetimePicker,
   Uploader,
   Loading,
-  Picker
+  Picker,
+  CouponCell,
+  CouponList
 ]
 
 const install = function (Vue) {
