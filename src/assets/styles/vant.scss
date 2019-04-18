@@ -24,7 +24,18 @@ body {
   .coupon {
     .van-cell {
       background: #F9F9F9;
-      margin-bottom: 15px;
+      padding: 15px 15px 0px 15px;
+    }
+    .van-cell:not(:last-child)::after {
+      border-bottom: none;
+    }
+    .coupon_content .btn-conduct {
+      border: 2px solid #55ADFC;
+      color: #55ADFC;
+    }
+    .coupon_content .btn-end {
+      border: 2px solid #ACACAC;
+      color: #ACACAC;
     }
   }
 }

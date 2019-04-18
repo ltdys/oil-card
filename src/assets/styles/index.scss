@@ -27,3 +27,10 @@ img{
   height: 10px;
   background: #eee;
 }
+
+//将图片变成灰色
+.img-filter {
+  filter: gray;
+  filter: grayscale(1);
+  -webkit-filter: grayscale(1);
+}

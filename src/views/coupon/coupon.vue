@@ -10,11 +10,13 @@
     >
       <van-cell v-for="(item, index) in list" :key="index">
         <div class="coupon_img">
-          <img :src="item.img" alt="..">
+          <img :src="item.img" alt=".."
+            :class="[item.type === '已结束' ? 'img-filter' : '']">
         </div>
         <div class="coupon_content">
           <div>{{item.title}}</div>
-          <div class="coupon_content__btn">
+          <div class="coupon_content__btn"
+            :class="[item.type === '进行中' ? 'btn-conduct' : 'btn-end']">
             {{item.type}}
           </div>
         </div>
@@ -34,7 +36,7 @@ export default {
       }, {
         img: 'static/images/banner1.jpg',
         title: '邀请好友,红包拿不停',
-        type: '进行中'
+        type: '已结束'
       }],
       loading: false,
       finished: false,
@@ -67,11 +69,9 @@ export default {
       &__btn {
         width: 58px;
         height: 29px;
-        line-height: 29px;
+        line-height: 25px;
         font-size: 13px;
         text-align: center;
-        border: 2px solid #55ADFC;
-        color: #55ADFC;
       }
     }
   }
