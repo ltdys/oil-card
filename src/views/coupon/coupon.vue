@@ -62,6 +62,7 @@ export default {
       display: flex;
       justify-content: space-between;
       padding: 16px 21px;
+      background: #fff;
       color: #393939;
       &__btn {
         width: 58px;
