@@ -4,7 +4,6 @@
     
     <van-field
       v-model="card"
-      type="number"
       required
       clearable
       label="油卡卡号"

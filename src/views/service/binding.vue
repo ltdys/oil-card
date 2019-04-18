@@ -10,7 +10,6 @@
     </van-field>
     <van-field
       v-model="formData.card"
-      type="number"
       required
       clearable
       label="卡号"
