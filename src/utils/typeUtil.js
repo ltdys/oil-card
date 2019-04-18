@@ -157,6 +157,24 @@ var isString = o => Object.prototype.toString.call(o).slice(8, -1) === 'String',
       }
     }
     return flag
+  },
+
+  verifyObj = (val) => { //判断对象是否为空  或者  每个属性都没空
+    if (Object.keys(val).length == 0) {
+      return false
+    } else {
+      let num = 0
+      for (let key in val) {
+        if (val[key] == '') {
+          return false
+        } else {
+          num++
+        }
+      }
+      if (num == Object.keys(val).length) {
+        return true
+      }
+    }
   }
 
 export {
@@ -167,5 +185,6 @@ export {
   isPc,
   browserType,
   checkStr,
-  paramsValidate
+  paramsValidate,
+  verifyObj
 }

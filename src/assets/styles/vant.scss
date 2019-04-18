@@ -21,7 +21,7 @@ body {
     .van-button--primary {
       width: 346px;
       height: 52px;
-      margin-top: 64px;
+      margin-top: 38px;
     }
   }
   .coupon {
@@ -39,6 +39,14 @@ body {
     .coupon_content .btn-end {
       border: 2px solid #ACACAC;
       color: #ACACAC;
+    }
+  }
+  .zjzp-cell {
+    .van-cell__title{
+      max-width: 1.8rem;
+    }
+    .van-cell__value{
+      text-align: left;
     }
   }
 }
