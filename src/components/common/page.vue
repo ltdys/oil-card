@@ -81,7 +81,7 @@ export default {
     position: relative;
     overflow-y: auto;
     -webkit-overflow-scrolling:touch;
-    background: #F8F8F8;
+    background: #F9F9F9;
   }
   &-footer{
     position: absolute;

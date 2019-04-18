@@ -23,7 +23,7 @@ body {
   }
   .coupon {
     .van-cell {
-      background: #F9F9F9;
+      background: $cf9;
       padding: 15px 15px 0px 15px;
     }
     .van-cell:not(:last-child)::after {
