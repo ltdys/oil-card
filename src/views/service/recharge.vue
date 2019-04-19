@@ -11,7 +11,7 @@
     </template>
     <template v-else>
       <div class="recharge_addcard">
-        <div class="recharge_addcard__btn">
+        <div class="recharge_addcard__btn" @click="$router.push('/service/recharge_addcard')">
           <van-icon name="plus"></van-icon>
           <span>添加油卡</span>
         </div>
@@ -83,7 +83,7 @@ const coupon = {
 export default {
   data() {
     return {
-      hasCard: false,
+      hasCard: true,
       card: 'NO1000114500001332537',  //油卡卡号
       iconName: 'arrow-down',  //icon图标
       checked: false,

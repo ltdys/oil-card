@@ -70,6 +70,10 @@ export const routes = [{
     component: () => import('@/views/service/recharge.vue')
   },
   {
+    path: '/service/recharge_addcard', //油卡充值
+    component: () => import('@/views/service/recharge_addcard.vue')
+  },
+  {
     path: '/service/loss_report', //油卡挂失
     component: () => import('@/views/service/loss_report.vue')
   },
