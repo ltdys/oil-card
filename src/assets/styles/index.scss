@@ -34,3 +34,10 @@ img{
   filter: grayscale(1);
   -webkit-filter: grayscale(1);
 }
+
+//修改input选中样式
+input[type="checkbox"]:checked::before{
+  content: "";
+  color: #55ADFC;
+  border-color: #55ADFC;
+}

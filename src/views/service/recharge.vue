@@ -2,11 +2,21 @@
   <com-page class="recharge">
     <com-header title="油卡充值" is-back slot="header"></com-header>
     
-    <div class="recharge_top">
-      <div><img src="static/images/icon/problem.png" alt=".." class="recharge_top__img"></div>
-      <div>{{card}}</div>
-      <div><van-icon :name="iconName"></van-icon></div>
-    </div>
+    <template v-if="hasCard">
+      <div class="recharge_top">
+        <div><img src="static/images/icon/problem.png" alt=".." class="recharge_top__img"></div>
+        <div>{{card}}</div>
+        <div><van-icon :name="iconName"></van-icon></div>
+      </div>
+    </template>
+    <template v-else>
+      <div class="recharge_addcard">
+        <div class="recharge_addcard__btn">
+          <van-icon name="plus"></van-icon>
+          <span>添加油卡</span>
+        </div>
+      </div>
+    </template>
     <div class="recharge_recharge">
       <div>选中充值金额</div>
       <div class="recharge_recharge__panel">
@@ -27,19 +37,23 @@
     </div>
     <div class="recharge_agreement">
       <div>提醒:代充值服务暂不提供发票</div>
-      <div>同意<span class="recharge_agreement__text">{{agreementText}}</span></div>
+      <div>
+        <input type="checkbox" v-model="checked" class="vertical-align-middle">
+        <span class="vertical-align-middle">同意</span>
+        <span class="recharge_agreement__text vertical-align-middle">{{agreementText}}</span>
+      </div>
     </div>
 
-    <van-goods-action>
-      <van-goods-action-big-btn
-        text="总计:99(省1元)"
-      />
-      <van-goods-action-big-btn
-        primary
-        text="立即充值"
-        @click="onClickBigBtn"
-      />
-    </van-goods-action>
+    <div class="recharge_action">
+      <div class="recharge_action__data">
+        <span>总计:</span>
+        <span>&nbsp;￥99&nbsp;</span>
+        <span>(省1元)</span>
+      </div>
+      <div class="recharge_action__submit" :class="[!checked ? 'opacity-disabled' : '']">
+        立即充值
+      </div>
+    </div>
 
     <!-- 优惠券列表 -->
     <van-popup v-model="showList" position="bottom">
@@ -69,8 +83,10 @@ const coupon = {
 export default {
   data() {
     return {
+      hasCard: false,
       card: 'NO1000114500001332537',  //油卡卡号
       iconName: 'arrow-down',  //icon图标
+      checked: false,
       list:[{
         title: '100元',
         desc: '支付99元',
@@ -128,6 +144,24 @@ export default {
         height: 42px;
       }
     }
+    &_addcard {
+      height: 83px;
+      background: #fff;
+      padding: 15px;
+      color: #fff;
+      &__btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        background: #55ADFC;
+        border-radius: 2px;
+        >span {
+          margin-left: 5px;
+          font-size: 16px;
+        }
+      }
+    }
     &_recharge {
       padding: 15px;
       height: 146px;
@@ -160,6 +194,43 @@ export default {
       color: #A0A0A0;
       &__text {
         color: #55ADFC;
+      }
+    }
+    &_action {
+      height: 52px;
+      display: flex;
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      box-sizing: border-box;
+      &__data {
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color:#fff;
+        border: 0.02rem solid #fff;
+        color: #313131;
+        span:nth-child(1) {
+          font-size: 15px;
+        }
+        span:nth-child(2) {
+          font-size: 21px;
+          color: #FC4C5D;
+        }
+        span:nth-child(3) {
+          font-size: 13px;
+        }
+      }
+      &__submit {
+        width: 50%;
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #55ADFC;
+        border: 0.02rem solid #55ADFC;
       }
     }
     .recharge-check {

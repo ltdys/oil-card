@@ -71,3 +71,11 @@ chrome scrollbar::-webkit-scrollbar {
 ::-webkit-scrollbar-track-piece {
   background: rgba($c00, 0.2);
 }
+
+.vertical-align-middle {
+  vertical-align: middle;
+}
+
+.opacity-disabled {
+  opacity: .5;
+}
