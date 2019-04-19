@@ -38,9 +38,9 @@
     <div class="recharge_agreement">
       <div>提醒:代充值服务暂不提供发票</div>
       <div>
-        <input type="checkbox" v-model="checked" class="vertical-align-middle">
-        <span class="vertical-align-middle">同意</span>
-        <span class="recharge_agreement__text vertical-align-middle">{{agreementText}}</span>
+        <van-checkbox v-model="checked">
+          同意<span class="recharge_agreement__text vertical-align-middle">{{agreementText}}</span>
+        </van-checkbox>
       </div>
     </div>
 
@@ -74,7 +74,7 @@
       <div v-for="(item, index) in pupupList" :key="index" class="recharge_popup">
         <div><img src="static/images/icon/card.png" alt=".."></div>
         <div>{{item.card}}</div>
-        <div><input type="checkbox" name="popup"></div>
+        <van-checkbox v-model="item.isCheck"></van-checkbox>
       </div>
     </van-popup>
   </com-page>
@@ -114,13 +114,17 @@ export default {
         isCheck: false
       }],
       pupupList: [{
-        card: 'NO 1000114500001332537'
+        card: 'NO 1000114500001332537',
+        isCheck: false
       }, {
-        card: 'NO 1000114500001332538'
+        card: 'NO 1000114500001332538',
+        isCheck: false
       }, {
-        card: 'NO 1000114500001332539'
+        card: 'NO 1000114500001332539',
+        isCheck: false
       }, {
-        card: 'NO 1000114500001332540'
+        card: 'NO 1000114500001332540',
+        isCheck: false
       }],
       //选择优惠券
       showList: false,
@@ -277,6 +281,5 @@ export default {
       background: #F1F1F1;
       color: #313131;
     }
-
   }
 </style>
