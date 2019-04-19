@@ -4,9 +4,9 @@
     
     <template v-if="hasCard">
       <div class="recharge_top">
-        <div><img src="static/images/icon/problem.png" alt=".." class="recharge_top__img"></div>
+        <div><img src="static/images/icon/card.png" alt=".." class="recharge_top__img"></div>
         <div>{{card}}</div>
-        <div><van-icon :name="iconName"></van-icon></div>
+        <div><van-icon :name="iconName" @click="iconClick"></van-icon></div>
       </div>
     </template>
     <template v-else>
@@ -65,6 +65,18 @@
         @exchange="onExchange"
       />
     </van-popup>
+
+    <!-- popup弹出层 -->
+    <van-popup
+      v-model="popupShow"
+      position="top"
+      :overlay="false">
+      <div v-for="(item, index) in pupupList" :key="index" class="recharge_popup">
+        <div><img src="static/images/icon/card.png" alt=".."></div>
+        <div>{{item.card}}</div>
+        <div><input type="checkbox" name="popup"></div>
+      </div>
+    </van-popup>
   </com-page>
 </template>
 
@@ -87,6 +99,7 @@ export default {
       card: 'NO1000114500001332537',  //油卡卡号
       iconName: 'arrow-down',  //icon图标
       checked: false,
+      popupShow: false,
       list:[{
         title: '100元',
         desc: '支付99元',
@@ -99,6 +112,15 @@ export default {
         title: '500元',
         desc: '支付496元',
         isCheck: false
+      }],
+      pupupList: [{
+        card: 'NO 1000114500001332537'
+      }, {
+        card: 'NO 1000114500001332538'
+      }, {
+        card: 'NO 1000114500001332539'
+      }, {
+        card: 'NO 1000114500001332540'
       }],
       //选择优惠券
       showList: false,
@@ -126,6 +148,10 @@ export default {
     },
     onClickBigBtn () {
       
+    },
+    iconClick () {
+      this.popupShow = this.iconName === 'arrow-down'
+      this.iconName = this.iconName === 'arrow-down' ? 'arrow-up' : 'arrow-down'
     }
   }
 };
@@ -231,6 +257,16 @@ export default {
         align-items: center;
         background-color: #55ADFC;
         border: 0.02rem solid #55ADFC;
+      }
+    }
+    &_popup {
+      height: 83px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      img {
+        width: 63px;
+        height: 42px;
       }
     }
     .recharge-check {
