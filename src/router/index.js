@@ -54,6 +54,14 @@ export const routes = [{
     component: () => import('@/views/my/integral.vue')
   },
   {
+    path: '/my/edit_name', //修改昵称
+    component: () => import('@/views/my/name/edit_name.vue')
+  },
+  {
+    path: '/my/edit_phone', //修改手机号
+    component: () => import('@/views/my/phone/edit_phone.vue')
+  },
+  {
     path: '/service/appointment', //预约办卡
     component: () => import('@/views/service/appointment.vue')
   },

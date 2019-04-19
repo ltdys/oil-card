@@ -1,6 +1,11 @@
 export const list_mixins = {
   data () {
     return {
+      userInfo: {
+        img: 'static/images/icon/gril3.png',
+        userName: '修身',
+        phone: '18814479161'
+      },
       pageIndex:1,
       pageSize:20,
       resultList:[],

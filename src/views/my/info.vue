@@ -1,12 +1,20 @@
 <template>
-  <com-page class="my">
+  <com-page class="myinfo">
     <com-header title="个人信息" is-back slot="header"></com-header>
-    
+    <van-uploader :after-read="onRead" accept="image/gif, image/jpeg, image/png">
+			<van-cell title="头像" is-link class="zl-cell">
+				<img class="myinfo__avatar" :src="userInfo.img | vUserImg" onerror="onerror=null;this.src='static/images/icon/user_defu.png'"/>
+			</van-cell>
+		</van-uploader>
+    <van-cell title="昵称" :value="userInfo.userName" is-link @click.native="$router.push('/my/edit_name')"></van-cell>
+    <van-cell title="手机号" :value="userInfo.phone | vPhone" is-link @click.native="$router.push('/my/edit_phone')"></van-cell>
   </com-page>
 </template>
 
 <script>
+import { list_mixins } from "@/mixins";
 export default {
+  mixins: [list_mixins],
   data() {
     return {
       
@@ -16,9 +24,30 @@ export default {
     
   },
   methods: {
+    onRead (v) { //图片切换
+			console.log(v)
+			let self = this;
+			self.userInfo.img = v.content
+		},
   }
 };
 </script>
 <style lang="scss">
+.myinfo{
+  &__avatar{
+    display: inline-block;
+    border-radius: 50%;
+    height: 50px;
+		width: 50px;
+		vertical-align: middle;
+  }
+  .zl-cell{
+		display: flex;
+    align-items: center;
+    padding: 11px 15px;
+    height: 73px;
+    box-sizing: border-box;
+	}
+}
 </style>
 
