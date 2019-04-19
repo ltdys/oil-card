@@ -37,10 +37,13 @@
       <van-button type="primary" :disabled="isSubmit" @click="submit">申请退卡</van-button>
     </div>
 
-    <van-actionsheet
-      v-model="show"
-      :actions="actions"
-      @select="onSelect"
+    <van-picker
+      v-show="show"
+      :default-index="0"
+      show-toolbar
+      :columns="columns"
+      @cancel="onCancel"
+      @confirm="onConfirm"
     />
   </com-page>
 </template>
@@ -60,21 +63,7 @@ export default {
       },
       show: false,
       isSubmit: true,
-      actions: [{
-        name: '选择快递'
-      }, {
-        name: '顺丰'
-      }, {
-        name: '中通'
-      }, {
-        name: '申通'
-      }, {
-        name: '韵达'
-      }, {
-        name: '圆通'
-      }, {
-        name: 'EMS'
-      }]
+      columns: ['顺丰', '中通', '申通', '韵达', '圆通', 'EMS']
     };
   },
 
@@ -94,8 +83,11 @@ export default {
     expressChange () {
       this.show = true
     },
-    onSelect (item) {
-      this.formData.express = item.name
+    onConfirm(value, index) {
+      this.formData.express = value
+      this.show = false
+    },
+    onCancel () {
       this.show = false
     },
     submit () {
