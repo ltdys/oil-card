@@ -4,6 +4,7 @@ import {setSesStorage, getSesStore, getLocalStore, setLocalStore, clearStorage} 
 const state = {
   userInfo: {},  //用户信息
   currentOil: 0, //当前选择的油卡充值类型
+  currentDity: {}, //当前油卡详情数据
 }
 
 const actions = {
@@ -12,6 +13,9 @@ const actions = {
   },
   setCurrentOil ( { commit }, boo) {
     commit(types.SET_CURRENT_OIL, boo)
+  },
+  setCurrentDity ( { commit }, boo) {
+    commit(types.SET_CURRENT_DITY, boo)
   },
 }
 
@@ -26,6 +30,9 @@ const getters = {
   getCurrentOil: state => {
     return state.currentOil
   },
+  getCurrentDity: state => {
+    return state.currentDity
+  },
 }
 
 const mutations = {
@@ -37,6 +44,10 @@ const mutations = {
   //当前选择的油卡充值类型
   ['SET_CURRENT_OIL'] (state, boo) {
     state.currentOil = boo
+  },
+  //当前油卡详情数据
+  ['SET_CURRENT_DITY'] (state, boo) {
+    state.currentDity = boo
   },
 }
 

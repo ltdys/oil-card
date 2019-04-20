@@ -96,14 +96,22 @@ export default {
           list: [
             {
               title: '充值成功',
+              id: '45656564892143',
+              name: '加油卡充值',
               sum: '100',
               orderId: '21554860',
-              time: '2018.04.01 12:00'
+              time: '2018.04.01 12:00',
+              type: '支付宝',
+              state: '付款成功'
             }, {
               title: '充值失败',
+              id: '45656564892143',
+              name: '加油卡充值',
               sum: '100',
               orderId: '21554860',
-              time: '2018.04.01 12:00'
+              time: '2018.04.01 12:00',
+              type: '微信',
+              state: '付款失败'
             }, 
           ]
         }, {
@@ -112,14 +120,22 @@ export default {
           list: [
             {
               title: '油卡充值消费',
+              id: '45656564892143',
+              name: '加油卡消费',
               sum: '100',
               orderId: '21554860',
-              time: '2018.04.01 12:00'
+              time: '2018.04.01 12:00',
+              type: '微信',
+              state: '付款成功'
             }, {
               title: '油卡充值消费',
+              id: '45656564892143',
+              name: '加油卡消费',
               sum: '100',
               orderId: '21554860',
-              time: '2018.04.01 12:00'
+              time: '2018.04.01 12:00',
+              type: '支付宝',
+              state: '付款失败'
             }, 
           ]
         }
@@ -138,6 +154,7 @@ export default {
     },
     jumpDetail (val, old) {
       this.$store.dispatch("setCurrentOil", this.currentTab)
+      this.$store.dispatch("setCurrentDity", val)
       this.$router.push('/my/oil_detail')
     }
   }
