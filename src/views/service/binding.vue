@@ -16,7 +16,6 @@
       placeholder="输入油卡背面的卡号">
     </van-field>
     <van-field
-      type="tel"
       v-model="formData.cardholder"
       required
       clearable
@@ -25,10 +24,11 @@
     </van-field>
     <van-field
       v-model="formData.phone"
-      type="number"
+      type="tel"
       required
       clearable
       label="手机号"
+      :error-message="errorMsg.phone"
       placeholder="输入持卡人手机号">
     </van-field>
     <div class="submit_buttons">
@@ -38,7 +38,8 @@
 </template>
 
 <script>
-import { paramsValidate } from '@/utils/typeUtil'
+import { checkStr, paramsValidate } from '@/utils/typeUtil'
+import validator from "@/utils/validator.js"
 export default {
   data() {
     return {
@@ -47,6 +48,25 @@ export default {
         card: '',  //卡号
         cardholder: '',  //持卡人
         phone: ''  //手机号
+      },
+      //校验
+      rules: {
+        phone: [
+          {
+            validator: (rule, value, callback) => {
+              if (!value) {
+                callback("请输入手机号码");
+              } else if (checkStr(value, 'phone')) {
+                callback();
+              } else {
+                callback("请输入正确的手机号码");
+              }
+            }
+          }
+        ],
+      },
+      errorMsg: {
+        phone: ''
       },
       isSubmit: true,
     };
@@ -62,12 +82,47 @@ export default {
   },
   
   created() {
-    
+    this.validator = validator(this.rules, this.formData)
   },
   methods: {
     submit () {
-
-    }
+      this.validate(error => {
+				if (!error) {
+					this.register()
+				}
+      }, this.formData)
+    },
+    validate(callback, data) {
+      this.validator.validate((errors, fields) => {
+        this.resetField();
+        if (errors) {
+          fields.forEach(item => {
+            this.errorMsg[item.field] = item.message;
+          });
+        }
+        callback && callback(errors, fields);
+      }, data);
+    },
+    oneValidate (data) {
+      this.validator.validate((errors, fields) => {
+        this.resetField();
+        if (errors) {
+          fields.forEach(item => {
+            this.errorMsg[item.field] = item.message;
+          });
+        }
+      }, data);
+    },
+    resetField(attrs) {
+      attrs = !attrs
+        ? Object.keys(this.errorMsg)
+        : Array.isArray(attrs)
+        ? attrs
+        : [attrs];
+      attrs.forEach(attr => {
+        this.errorMsg[attr] = "";
+      });
+		}
   }
 };
 </script>

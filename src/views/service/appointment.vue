@@ -25,11 +25,12 @@
       placeholder="输入收件人姓名">
     </van-field>
     <van-field
-      type="number"
+      type="tel"
       v-model="formData.phone"
       required
       clearable
       label="手机号"
+      :error-message="errorMsg.phone"
       placeholder="输入收件人手机号">
     </van-field>
     <van-field
@@ -85,6 +86,9 @@ export default {
           }
         ],
       },
+      errorMsg: {
+        phone: ''
+      },
       show: false,
       isSubmit: true,
       columns: ['顺丰', '中通', '申通', '韵达', '圆通', 'EMS']
@@ -101,7 +105,7 @@ export default {
   },
 
   created() {
-   
+    this.validator = validator(this.rules, this.formData)
   },
   methods: {
     expressChange () {
@@ -115,12 +119,43 @@ export default {
       this.show = false
     },
     submit () {
-      // this.validator.validate(error => {
-			// 	if (!error) {
-      //     debugger
-			// 	}
-      // }, this.formData)
-    }
+      this.validate(error => {
+				if (!error) {
+					this.register()
+				}
+      }, this.formData)
+    },
+    validate(callback, data) {
+      this.validator.validate((errors, fields) => {
+        this.resetField();
+        if (errors) {
+          fields.forEach(item => {
+            this.errorMsg[item.field] = item.message;
+          });
+        }
+        callback && callback(errors, fields);
+      }, data);
+    },
+    oneValidate (data) {
+      this.validator.validate((errors, fields) => {
+        this.resetField();
+        if (errors) {
+          fields.forEach(item => {
+            this.errorMsg[item.field] = item.message;
+          });
+        }
+      }, data);
+    },
+    resetField(attrs) {
+      attrs = !attrs
+        ? Object.keys(this.errorMsg)
+        : Array.isArray(attrs)
+        ? attrs
+        : [attrs];
+      attrs.forEach(attr => {
+        this.errorMsg[attr] = "";
+      });
+		}
   }
 };
 </script>

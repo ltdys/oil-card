@@ -146,7 +146,7 @@ export default {
       chosenCoupon: -1,
       coupons: [coupon],
       disabledCoupons: [coupon],
-      agreementText: '<<服务协议>>'
+      agreementText: '《服务协议》'
     };
   },
   created() {
