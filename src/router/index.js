@@ -34,6 +34,10 @@ export const routes = [{
     component: () => import('@/views/my/wallet.vue')
   },
   {
+    path: '/my/oil_detail', //我的油卡充值详情
+    component: () => import('@/views/my/oil/oil_detail.vue')
+  },
+  {
     path: '/my/record', //油卡充值
     component: () => import('@/views/my/record.vue')
   },

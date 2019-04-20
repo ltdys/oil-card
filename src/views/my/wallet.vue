@@ -1,7 +1,46 @@
 <template>
-  <com-page class="my">
+  <com-page class="my_oil">
     <com-header title="我的油卡" is-back slot="header"></com-header>
-    
+    <van-swipe :width="swipeWid" :height="swipeHei" :loop="false" :show-indicators="false">
+      <van-swipe-item v-for="(item, index) in oilcardList" :key="index">
+        <div class="oil_box">
+          <img class="my_oil_img" v-lazy="item.img"/>
+          <div class="oil_box_ye">
+            <div>当前余额</div>
+            <div class="oil_box_ye_mon">{{ item.money | vFixedTwo }}</div>
+          </div>
+          <div class="oil_box_bm">{{ item.code | vUpperCase }}</div>
+          <div class="oil_box_zt">
+            <img v-if="item.status == 0" src="static/images/icon/encrypt.png" alt="">
+            <img v-else-if="item.status == 1" src="static/images/icon/lose.png" alt="">
+          </div>
+        </div>
+      </van-swipe-item>
+    </van-swipe>
+    <van-tabs
+      @click="changeTab"
+      v-model="currentTab"
+      title-inactive-color="#A3A3A3"
+      title-active-color="#313131"
+      color="#313131"
+      :line-width="31">
+      <van-tab v-for="(item, index) in tabList" :key="index" :title="item.title">
+        <div class="oil_cons" v-for="(val, ind) in item.list" :key="ind" @click="jumpDetail(val, item)">
+          <img v-if="currentTab == 0" src="static/images/icon/oil_czjl.png" alt="">
+          <img v-else-if="currentTab == 1" src="static/images/icon/oil_xfjl.png" alt="">
+          <div class="oil_cons_left">
+            <div class="oil_cons_left_title">{{ val.title }}</div>
+            <div class="oil_cons_left_order">订单号：{{ val.orderId }}</div>
+          </div>
+          <div class="oil_cons_right">
+            <div class="oil_cons_right_sum" :class="[currentTab == 0 ? 'color_red' : 'color_blue']">
+              <span v-show="currentTab == 1">-</span>{{ val.sum | vMoneyChange }}
+            </div>
+            <div class="oil_cons_right_time">{{ val.time }}</div>
+          </div>
+        </div>
+      </van-tab>
+    </van-tabs>
   </com-page>
 </template>
 
@@ -9,16 +48,186 @@
 export default {
   data() {
     return {
-      
+      swipeWid: 0, //轮播主图的宽度
+      swipeHei: 0, //轮播主图的高度
+      oilcardList: [
+        {
+          img: 'static/images/icon/oil_1.png',
+          money: '980',
+          code: 'no59895113564789',
+          status: 0
+        }, {
+          img: 'static/images/icon/oil_2.png',
+          money: '980',
+          code: 'no59895113564789',
+          status: 0
+        }, {
+          img: 'static/images/icon/oil_3.png',
+          money: '980',
+          code: 'no59895113564789',
+          status: 1
+        }, {
+          img: 'static/images/icon/oil_4.png',
+          money: '980',
+          code: 'no59895113564789',
+          status: 0
+        }, {
+          img: 'static/images/icon/oil_5.png',
+          money: '980',
+          code: 'no59895113564789',
+          status: 1
+        }, {
+          img: 'static/images/icon/oil_6.png',
+          money: '980',
+          code: 'no59895113564789',
+          status: 0
+        }, {
+          img: 'static/images/icon/oil_7.png',
+          money: '980',
+          code: 'no59895113564789',
+          status: 0
+        }
+      ],
+      currentTab: 0, //当前tab
+      tabList: [
+        {
+          index: 0,
+          title: '充值记录',
+          list: [
+            {
+              title: '充值成功',
+              sum: '100',
+              orderId: '21554860',
+              time: '2018.04.01 12:00'
+            }, {
+              title: '充值失败',
+              sum: '100',
+              orderId: '21554860',
+              time: '2018.04.01 12:00'
+            }, 
+          ]
+        }, {
+          index: 1,
+          title: '消费记录',
+          list: [
+            {
+              title: '油卡充值消费',
+              sum: '100',
+              orderId: '21554860',
+              time: '2018.04.01 12:00'
+            }, {
+              title: '油卡充值消费',
+              sum: '100',
+              orderId: '21554860',
+              time: '2018.04.01 12:00'
+            }, 
+          ]
+        }
+      ]
     };
   },
   created() {
-    
+    let self = this;
+    let pmWid = document.body.clientWidth;
+    self.swipeWid = pmWid * 323 / 375
+    self.swipeHei = self.swipeWid * 146 / 323
   },
   methods: {
+    changeTab (index, title) { //切换tab
+      this.currentTab = index
+    },
+    jumpDetail (val, old) {
+      this.$store.dispatch("setCurrentOil", this.currentTab)
+      this.$router.push('/my/oil_detail')
+    }
   }
 };
 </script>
 <style lang="scss">
+.my_oil{
+  &_img{
+    width: 100%;
+  }
+  .oil_box{
+    position: relative;
+    color: #FFF;
+    &_ye{
+      position: absolute;
+      top: 25px;
+      left: 25px;
+      &_mon{
+        font-size: 30px;
+      }
+    }
+    &_bm{
+      position: absolute;
+      bottom: 21px;
+      left: 25px;
+    }
+    &_zt{
+      position: absolute;
+      top: 25px;
+      right: 20px;
+    }
+  }
+  .oil_cons{
+    width: calc(100% - 30px);
+    padding: 17px 0;
+    margin: 0 15px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #F1F1F1;
+    img{
+      width: 50px;
+      height: 50px;
+      margin-right: 13px;
+    }
+    &_left{
+      width: 40%;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      flex-direction: column;
+      &_title{
+        font-size: 15px;
+        color: #313131;
+        font-weight:600;
+      }
+      &_order{
+        font-size: 13px;
+        color: #A8A8A8;
+      }
+    }
+    &_right{
+      width: 40%;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      flex-direction: column;
+      .color_red{
+        color: #FF4560;
+      }
+      .color_blue{
+        color: #53A8FD;
+      }
+      &_sum{
+        font-size: 17px;
+        font-weight:600;
+      }
+      &_time{
+        font-size: 13px;
+        color: #A8A8A8;
+      }
+    }
+  }
 
+  .van-swipe{
+    padding-left: 30px;
+    box-sizing: border-box;
+    .van-swipe-item{
+      padding-right: 10px;
+    }
+  }
+}
 </style>

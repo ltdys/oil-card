@@ -14,7 +14,23 @@ const vFilter = {
   vUserImg: value => { //用户头像
     if (!value) { value = 'static/images/icon/user_defu.png' }
     return value
-  }
+  },
+  vFixedTwo: value => {//保留两位小数
+    if (!value) { value = 0 }
+    return parseFloat(value).toFixed(2)
+  },
+  vUpperCase: value => { //转化大写
+    if (!value) { value = '' }
+    return value.toUpperCase()
+  },
+  vLowerCase: value => { //转化小写
+    if (!value) { value = '' }
+    return value.toLowerCase()
+  },
+  vMoneyChange: value => {//金额转化
+    if (!value) { value = 0 }
+    return "￥" + value
+  },
 }
 
 export default vFilter
