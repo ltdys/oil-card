@@ -1,6 +1,6 @@
 <template>
   <com-page class="my">
-    <com-header title="充值记录" is-back slot="header"></com-header>
+    <com-header title="油卡充值" is-back slot="header"></com-header>
     
   </com-page>
 </template>
