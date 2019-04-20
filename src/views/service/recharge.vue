@@ -47,8 +47,8 @@
     <div class="recharge_action">
       <div class="recharge_action__data">
         <span>总计:</span>
-        <span>&nbsp;￥99&nbsp;</span>
-        <span>(省1元)</span>
+        <span>&nbsp;￥{{payment}}&nbsp;</span>
+        <span>(省{{less}}元)</span>
       </div>
       <div class="recharge_action__submit" :class="[!checked ? 'opacity-disabled' : '']">
         立即充值
@@ -70,13 +70,19 @@
     <van-popup
       v-model="popupShow"
       position="top"
-      :overlay="false">
+      :overlay="false"
+      style="z-index: 2000">
       <div v-for="(item, index) in pupupList" :key="index" class="recharge_popup">
         <div><img src="static/images/icon/card.png" alt=".."></div>
         <div>{{item.card}}</div>
-        <van-checkbox v-model="item.isCheck"></van-checkbox>
+        <van-radio-group v-model="radio" @change="radioChange">
+          <van-radio :name="item.card" />
+        </van-radio-group>
       </div>
     </van-popup>
+
+    <div class="recharge_overlay" style="z-index: 1999" v-show="iconName === 'arrow-up'"> 
+    </div>
   </com-page>
 </template>
 
@@ -100,19 +106,28 @@ export default {
       iconName: 'arrow-down',  //icon图标
       checked: false,
       popupShow: false,
+      radio: '1',
       list:[{
         title: '100元',
         desc: '支付99元',
-        isCheck: true
+        isCheck: true,
+        payment: '99',
+        less: '1'
       }, {
         title: '200元',
         desc: '支付198元',
         isCheck: false,
+        payment: '198',
+        less: '2'
       }, {
         title: '500元',
         desc: '支付496元',
-        isCheck: false
+        isCheck: false,
+        payment: '500',
+        less: '4'
       }],
+      payment: '',
+      less: '',
       pupupList: [{
         card: 'NO 1000114500001332537',
         isCheck: false
@@ -135,10 +150,13 @@ export default {
     };
   },
   created() {
-    
+    this.payment = this.list[0].payment
+    this.less = this.list[0].less
   },
   methods: {
     clickPanel (item) {
+      this.payment = item.payment
+      this.less = item.less
       this.list.forEach((l, i) => {
         l.isCheck = l.title === item.title
       })
@@ -156,12 +174,25 @@ export default {
     iconClick () {
       this.popupShow = this.iconName === 'arrow-down'
       this.iconName = this.iconName === 'arrow-down' ? 'arrow-up' : 'arrow-down'
+    },
+    radioChange (name) {
+      this.popupShow = false
+      this.iconName = 'arrow-down'
+      this.card = name
     }
   }
 };
 </script>
 <style lang="scss">
   .recharge {
+    &_overlay {
+      position: fixed;
+      top: 2.58rem;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+    }
     &_top {
       height: 83px;
       display: flex;
