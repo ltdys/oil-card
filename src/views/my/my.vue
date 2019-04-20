@@ -38,29 +38,33 @@ export default {
           path: '/my/safety'
         }, {
           img: 'static/images/icon/wallet.png',
-          text: '个人钱包',
+          text: '我的油卡',
           path: '/my/wallet'
         }, {
           img: 'static/images/icon/record.png',
-          text: '充值记录',
-          path: '/my/record'
+          text: '油卡充值',
+          path: '/service/recharge'
         }, {
           img: 'static/images/icon/rq_code.png',
-          text: '二维码推广',
+          text: '我的订单',
           path: '/my/rq_code'
         }, {
           img: 'static/images/icon/collect.png',
-          text: '已关注粉丝',
+          text: '我的优惠劵',
           path: '/my/follow_fans'
         }, {
           img: 'static/images/icon/coupon.png',
-          text: '优惠券',
+          text: '设置',
           path: '/my/yh_coupon'
         }, {
           img: 'static/images/icon/integral.png',
-          text: '积分',
+          text: '客服',
           path: '/my/integral'
-        }, {}
+        }, {
+          img: 'static/images/icon/integral.png',
+          text: '商城',
+          path: '/my/shopping'
+        }
       ]
     }
   },

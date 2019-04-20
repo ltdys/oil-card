@@ -30,28 +30,32 @@ export const routes = [{
     component: () => import('@/views/my/safety.vue')
   },
   {
-    path: '/my/wallet', //个人钱包
+    path: '/my/wallet', //我的油卡
     component: () => import('@/views/my/wallet.vue')
   },
   {
-    path: '/my/record', //充值记录
+    path: '/my/record', //油卡充值
     component: () => import('@/views/my/record.vue')
   },
   {
-    path: '/my/rq_code', //二维码推广
+    path: '/my/rq_code', //我的订单
     component: () => import('@/views/my/rq_code.vue')
   },
   {
-    path: '/my/follow_fans', //已关注粉丝
+    path: '/my/follow_fans', //我的优惠券
     component: () => import('@/views/my/follow_fans.vue')
   },
   {
-    path: '/my/yh_coupon', //优惠券
+    path: '/my/yh_coupon', //设置
     component: () => import('@/views/my/yh_coupon.vue')
   },
   {
-    path: '/my/integral', //积分
+    path: '/my/integral', //客服
     component: () => import('@/views/my/integral.vue')
+  },
+  {
+    path: '/my/shopping', //商城
+    component: () => import('@/views/my/shopping.vue')
   },
   {
     path: '/my/edit_name', //修改昵称
