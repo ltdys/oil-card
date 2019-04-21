@@ -30,8 +30,8 @@ export const routes = [{
     component: () => import('@/views/my/safety.vue')
   },
   {
-    path: '/my/wallet', //我的油卡
-    component: () => import('@/views/my/wallet.vue')
+    path: '/my/oil_card', //我的油卡wallet
+    component: () => import('@/views/my/oil_card.vue')
   },
   {
     path: '/my/oil_detail', //我的油卡充值详情
@@ -50,20 +50,20 @@ export const routes = [{
     component: () => import('@/views/my/record.vue')
   },
   {
-    path: '/my/rq_code', //我的订单
-    component: () => import('@/views/my/rq_code.vue')
+    path: '/my/my_order', //我的订单rq_code
+    component: () => import('@/views/my/my_order.vue')
   },
   {
-    path: '/my/follow_fans', //我的优惠券
-    component: () => import('@/views/my/follow_fans.vue')
-  },
-  {
-    path: '/my/yh_coupon', //设置
+    path: '/my/yh_coupon', //我的优惠券follow_fans
     component: () => import('@/views/my/yh_coupon.vue')
   },
   {
-    path: '/my/integral', //客服
-    component: () => import('@/views/my/integral.vue')
+    path: '/my/my_setting', //设置yh_coupon
+    component: () => import('@/views/my/my_setting.vue')
+  },
+  {
+    path: '/my/service', //客服
+    component: () => import('@/views/my/service.vue')
   },
   {
     path: '/my/shopping', //商城

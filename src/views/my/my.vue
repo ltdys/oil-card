@@ -39,7 +39,7 @@ export default {
         }, {
           img: 'static/images/icon/wallet.png',
           text: '我的油卡',
-          path: '/my/wallet'
+          path: '/my/oil_card'
         }, {
           img: 'static/images/icon/record.png',
           text: '油卡充值',
@@ -47,19 +47,19 @@ export default {
         }, {
           img: 'static/images/icon/rq_code.png',
           text: '我的订单',
-          path: '/my/rq_code'
+          path: '/my/my_order'
         }, {
           img: 'static/images/icon/collect.png',
           text: '我的优惠劵',
-          path: '/my/follow_fans'
+          path: '/my/yh_coupon'
         }, {
           img: 'static/images/icon/coupon.png',
           text: '设置',
-          path: '/my/yh_coupon'
+          path: '/my/my_setting'
         }, {
           img: 'static/images/icon/integral.png',
           text: '客服',
-          path: '/my/integral'
+          path: '/my/service'
         }, {
           img: 'static/images/icon/integral.png',
           text: '商城',
