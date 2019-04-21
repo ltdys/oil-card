@@ -2,7 +2,7 @@
   <com-page class="my_oil">
     <com-header title="我的油卡" is-back is-go icon-name="plus" v-on:goClick="goClick" slot="header"></com-header>
     <van-swipe :width="swipeWid" :height="swipeHei" :loop="false" :show-indicators="false">
-      <van-swipe-item v-for="(item, index) in oilcardList" :key="index" @click="oilCardClick(item)">
+      <van-swipe-item v-for="(item, index) in oilcardList" :key="index">
         <div class="oil_box">
           <img class="my_oil_img" v-lazy="item.img"/>
           <div class="oil_box_ye">
@@ -12,7 +12,7 @@
           <div class="oil_box_bm">{{ item.code | vUpperCase }}</div>
           <div class="oil_box_zt">
             <img v-if="item.status == 0" src="static/images/icon/encrypt.png" alt="">
-            <img v-else-if="item.status == 1" src="static/images/icon/lose.png" alt="">
+            <img v-else-if="item.status == 1" src="static/images/icon/lose.png" alt="" @click="oilCardClick(item)">
           </div>
         </div>
       </van-swipe-item>
