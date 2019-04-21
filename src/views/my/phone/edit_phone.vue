@@ -2,10 +2,10 @@
   <com-page class="my-edit-phone">
     <com-header title="手机号" is-back slot="header"></com-header>
     <van-cell class="zjzp-cell former-phone" title="原手机号" :value="userInfo.phone"></van-cell>
-    <van-field label="身份证号" v-model="IDCord" clearable placeholder="输入持卡人身份证号"></van-field>
-    <van-field label="新手机号" v-model="newPhone" clearable placeholder="输入新手机号"></van-field>
+    <van-field label="身份证号" v-model="editPhone.IDCord" clearable placeholder="输入持卡人身份证号"></van-field>
+    <van-field label="新手机号" v-model="editPhone.newPhone" clearable placeholder="输入新手机号"></van-field>
     <van-field
-      v-model="verCode"
+      v-model="editPhone.verCode"
       center
       clearable
       label="验证码"
@@ -26,16 +26,34 @@ export default {
   mixins: [list_mixins],
   data() {
     return {
-      IDCord: '', //身份证号
-      newPhone: '', //新手机号
-      verCode: '', //验证码
+      editPhone: {
+        IDCord: '', //身份证号
+        newPhone: '', //新手机号
+        verCode: '', //验证码
+      },
       codeText: '发送验证码', //发送验证码
+      isBtnShow: true
     };
   },
   created() {
     
   },
+  watch: {
+    editPhone: {
+      handler: function (val, old) {
+        if (val.IDCord == '' || val.newPhone == '' || val.verCode == '') {
+          this.isBtnShow = true;
+        } else {
+          this.isBtnShow = false;
+        }
+      },
+      deep: true
+    }
+  },
   methods: {
+    confireBtn () { //确定
+
+    },
   }
 };
 </script>

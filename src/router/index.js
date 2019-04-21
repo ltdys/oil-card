@@ -38,6 +38,14 @@ export const routes = [{
     component: () => import('@/views/my/oil/oil_detail.vue')
   },
   {
+    path: '/my/oil_add', //我的油卡新增
+    component: () => import('@/views/my/oil/oil_add.vue')
+  },
+  {
+    path: '/my/oil_delete', //我的油卡解除绑定
+    component: () => import('@/views/my/oil/oil_delete.vue')
+  },
+  {
     path: '/my/record', //油卡充值
     component: () => import('@/views/my/record.vue')
   },

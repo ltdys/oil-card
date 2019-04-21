@@ -1,12 +1,12 @@
 <template>
   <com-page class="oil_detail">
-    <com-header :title="currentOil | vstatusTit" is-back slot="header"></com-header>
+    <com-header :title="currentOilType | vstatusTit" is-back slot="header"></com-header>
     <div class="detail_box">
-      <img v-if="currentOil == 0" src="static/images/icon/oil_czjl.png" alt="">
-      <img v-else-if="currentOil == 1" src="static/images/icon/oil_xfjl.png" alt="">
+      <img v-if="currentOilType == 0" src="static/images/icon/oil_czjl.png" alt="">
+      <img v-else-if="currentOilType == 1" src="static/images/icon/oil_xfjl.png" alt="">
       <div class="detail_box_title">{{ currentDity.title }}</div>
-      <div class="detail_box_sum" :class="[currentOil == 0 ? 'color_red' : 'color_blue']">
-        <span v-show="currentOil == 1">-</span>{{ currentDity.sum | vMoneyChange }}
+      <div class="detail_box_sum" :class="[currentOilType == 0 ? 'color_red' : 'color_blue']">
+        <span v-show="currentOilType == 1">-</span>{{ currentDity.sum | vMoneyChange }}
       </div>
     </div>
     <div class="detail_cont">
@@ -28,9 +28,9 @@ export default {
     };
   },
   computed: {
-    currentOil: {
+    currentOilType: {
       get: function () {
-        return this.$store.getters.getCurrentOil
+        return this.$store.getters.getCurrentOilType
       }
     },
     currentDity: {

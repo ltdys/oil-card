@@ -1,8 +1,8 @@
 <template>
   <com-page class="my_oil">
-    <com-header title="我的油卡" is-back slot="header"></com-header>
+    <com-header title="我的油卡" is-back is-go icon-name="plus" v-on:goClick="goClick" slot="header"></com-header>
     <van-swipe :width="swipeWid" :height="swipeHei" :loop="false" :show-indicators="false">
-      <van-swipe-item v-for="(item, index) in oilcardList" :key="index">
+      <van-swipe-item v-for="(item, index) in oilcardList" :key="index" @click="oilCardClick(item)">
         <div class="oil_box">
           <img class="my_oil_img" v-lazy="item.img"/>
           <div class="oil_box_ye">
@@ -153,9 +153,19 @@ export default {
       this.currentTab = index
     },
     jumpDetail (val, old) {
-      this.$store.dispatch("setCurrentOil", this.currentTab)
+      this.$store.dispatch("setCurrentOilType", this.currentTab)
       this.$store.dispatch("setCurrentDity", val)
       this.$router.push('/my/oil_detail')
+    },
+    goClick () { // 新增页面
+      this.$router.push('/my/oil_add')
+    },
+    oilCardClick (item) { // 解除绑定
+      let self = this;
+      if (item.status == 1) {
+        this.$store.dispatch("setCurrentOil", item)
+        self.$router.push('/my/oil_delete')
+      }
     }
   }
 };

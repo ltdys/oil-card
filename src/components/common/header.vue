@@ -3,15 +3,32 @@
     :title="title"
     :left-arrow="isBack"
     @click-left="onClickLeft"
-  />
+    @click-right="onClickRight">
+    <van-icon v-if="isGo" :name="iconName" slot="right"/>
+  </van-nav-bar>
 </template>
 <script>
 export default {
   name: "com-header",
+  data() {
+    return {
+      
+    }
+  },
   props: {
     title: String,
     isBack: Boolean,
+    isGo: Boolean,
+    iconName: String,
     isClick: Boolean
+  },
+  watch: {
+    isGo: {
+      handler: function (val, old) {
+        console.log(val)
+      },
+      deep: true
+    }
   },
   methods: {
     onClickLeft() {
@@ -20,6 +37,9 @@ export default {
       } else {
         this.$router.back();
       }
+    },
+    onClickRight() {
+      this.$emit('goClick')
     }
   }
 };
