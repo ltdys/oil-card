@@ -37,14 +37,15 @@
       <van-button type="primary" :disabled="isSubmit" @click="submit">申请退卡</van-button>
     </div>
 
-    <van-picker
-      v-show="show"
-      :default-index="0"
-      show-toolbar
-      :columns="columns"
-      @cancel="onCancel"
-      @confirm="onConfirm"
-    />
+    <van-popup position="bottom" v-model="show">
+      <van-picker
+        :default-index="0"
+        show-toolbar
+        :columns="columns"
+        @cancel="onCancel"
+        @confirm="onConfirm"
+      />
+    </van-popup>
   </com-page>
 </template>
 

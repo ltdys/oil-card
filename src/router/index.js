@@ -9,105 +9,173 @@ export const routes = [{
     children: [
       {
         path: '',
-        component: () => import('@/views/home/home.vue')
+        component: () => import('@/views/home/home.vue'),
+        meta: {
+          index: 1
+        }
       },
       {
         path: '/coupon',
-        component: () => import('@/views/coupon/coupon.vue')
+        component: () => import('@/views/coupon/coupon.vue'),
+        meta: {
+          index: 1
+        }
       },
       {
         path: '/my',
-        component: () => import('@/views/my/my.vue')
+        component: () => import('@/views/my/my.vue'),
+        meta: {
+          index: 1
+        }
       },
     ]
   },
   {
     path: '/my/info', //个人信息
-    component: () => import('@/views/my/info.vue')
+    component: () => import('@/views/my/info.vue'),
+    meta: {
+      index: 20
+    }
   },
   {
     path: '/my/safety', //安全认证
-    component: () => import('@/views/my/safety.vue')
+    component: () => import('@/views/my/safety.vue'),
+    meta: {
+      index: 20
+    }
   },
   {
     path: '/my/oil_card', //我的油卡wallet
-    component: () => import('@/views/my/oil_card.vue')
+    component: () => import('@/views/my/oil_card.vue'),
+    meta: {
+      index: 20
+    }
   },
   {
     path: '/my/oil_detail', //我的油卡充值详情
-    component: () => import('@/views/my/oil/oil_detail.vue')
+    component: () => import('@/views/my/oil/oil_detail.vue'),
+    meta: {
+      index: 21
+    }
   },
   {
     path: '/my/oil_add', //我的油卡新增
-    component: () => import('@/views/my/oil/oil_add.vue')
+    component: () => import('@/views/my/oil/oil_add.vue'),
+    meta: {
+      index: 22
+    }
   },
   {
     path: '/my/oil_delete', //我的油卡解除绑定
-    component: () => import('@/views/my/oil/oil_delete.vue')
+    component: () => import('@/views/my/oil/oil_delete.vue'),
+    meta: {
+      index: 23
+    }
   },
   {
     path: '/my/record', //油卡充值
-    component: () => import('@/views/my/record.vue')
+    component: () => import('@/views/my/record.vue'),
+    meta: {
+      index: 20
+    }
   },
   {
     path: '/my/my_order', //我的订单rq_code
-    component: () => import('@/views/my/my_order.vue')
+    component: () => import('@/views/my/my_order.vue'),
+    meta: {
+      index: 20
+    }
   },
   {
     path: '/my/yh_coupon', //我的优惠券follow_fans
-    component: () => import('@/views/my/yh_coupon.vue')
+    component: () => import('@/views/my/yh_coupon.vue'),
+    meta: {
+      index: 20
+    }
   },
   {
     path: '/my/my_setting', //设置yh_coupon
-    component: () => import('@/views/my/my_setting.vue')
+    component: () => import('@/views/my/my_setting.vue'),
+    meta: {
+      index: 20
+    }
   },
   {
     path: '/my/service', //客服
-    component: () => import('@/views/my/service.vue')
+    component: () => import('@/views/my/service.vue'),
+    meta: {
+      index: 20
+    }
   },
   {
     path: '/my/shopping', //商城
-    component: () => import('@/views/my/shopping.vue')
+    component: () => import('@/views/my/shopping.vue'),
+    meta: {
+      index: 20
+    }
   },
   {
     path: '/my/edit_name', //修改昵称
-    component: () => import('@/views/my/name/edit_name.vue')
+    component: () => import('@/views/my/name/edit_name.vue'),
+    meta: {
+      index: 21
+    }
   },
   {
     path: '/my/edit_phone', //修改手机号
-    component: () => import('@/views/my/phone/edit_phone.vue')
+    component: () => import('@/views/my/phone/edit_phone.vue'),
+    meta: {
+      index: 21
+    }
   },
   {
     path: '/service/appointment', //预约办卡
-    component: () => import('@/views/service/appointment.vue')
+    component: () => import('@/views/service/appointment.vue'),
+    meta: {
+      index: 10
+    }
   },
   {
     path: '/service/binding', //油卡绑定
-    component: () => import('@/views/service/binding.vue')
-  },
-  {
-    path: '/service/binding', //油卡绑定
-    component: () => import('@/views/service/binding.vue')
+    component: () => import('@/views/service/binding.vue'),
+    meta: {
+      index: 10
+    }
   },
   {
     path: '/service/recharge', //油卡充值
-    component: () => import('@/views/service/recharge.vue')
+    component: () => import('@/views/service/recharge.vue'),
+    meta: {
+      index: 10
+    }
   },
   {
-    path: '/service/recharge_addcard', //油卡充值
-    component: () => import('@/views/service/recharge_addcard.vue')
+    path: '/service/recharge_addcard', //油卡充值-添加油卡
+    component: () => import('@/views/service/recharge_addcard.vue'),
+    meta: {
+      index: 11
+    }
   },
   {
     path: '/service/loss_report', //油卡挂失
-    component: () => import('@/views/service/loss_report.vue')
+    component: () => import('@/views/service/loss_report.vue'),
+    meta: {
+      index: 10
+    }
   },
   {
     path: '/service/withdraw', //申请退卡
-    component: () => import('@/views/service/withdraw.vue')
+    component: () => import('@/views/service/withdraw.vue'),
+    meta: {
+      index: 10
+    }
   },
   {
     path: '/service/problem', //常见问题
-    component: () => import('@/views/service/problem.vue')
+    component: () => import('@/views/service/problem.vue'),
+    meta: {
+      index: 10
+    }
   },
 ]
 

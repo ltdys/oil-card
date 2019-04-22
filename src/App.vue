@@ -1,12 +1,28 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <transition :name="transitionName">
+      <router-view></router-view>
+    </transition>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+
+  data () {
+    return {
+      transitionName: 'van-slide-left'
+    }
+  },
+
+  watch: {
+    '$route': {
+      handler: function (val, oldval) {
+        this.transitionName = val.meta.index > oldval.meta.index ? 'van-slide-left' : 'van-slide-right'
+      }
+    }
+  }
 }
 </script>
 
