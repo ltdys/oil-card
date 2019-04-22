@@ -67,19 +67,21 @@
     </van-popup>
 
     <!-- popup弹出层 -->
-    <van-popup
-      v-model="popupShow"
-      position="top"
-      :overlay="false"
-      style="z-index: 2000">
-      <div v-for="(item, index) in pupupList" :key="index" class="recharge_popup">
-        <div><img src="static/images/icon/card.png" alt=".."></div>
-        <div>{{item.card}}</div>
-        <van-radio-group v-model="radio" @change="radioChange">
-          <van-radio :name="item.card" />
-        </van-radio-group>
-      </div>
-    </van-popup>
+    <transition name="van-fade">
+      <van-popup
+        v-model="popupShow"
+        position="top"
+        :overlay="false"
+        style="z-index: 2000">
+        <div v-for="(item, index) in pupupList" :key="index" class="recharge_popup">
+          <div><img src="static/images/icon/card.png" alt=".."></div>
+          <div>{{item.card}}</div>
+          <van-radio-group v-model="radio" @change="radioChange">
+            <van-radio :name="item.card" />
+          </van-radio-group>
+        </div>
+      </van-popup>
+    </transition>
 
     <div class="recharge_overlay" style="z-index: 1999" v-show="iconName === 'arrow-up'"> 
     </div>

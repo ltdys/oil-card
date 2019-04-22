@@ -12,14 +12,14 @@ export default {
 
   data () {
     return {
-      transitionName: 'van-slide-left'
+      transitionName: 'van-slide-right'
     }
   },
 
   watch: {
     '$route': {
       handler: function (val, oldval) {
-        this.transitionName = val.meta.index > oldval.meta.index ? 'van-slide-left' : 'van-slide-right'
+        this.transitionName = val.meta.index > oldval.meta.index ? 'van-slide-right' : 'van-slide-left'
       }
     }
   }
