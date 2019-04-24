@@ -177,6 +177,20 @@ export const routes = [{
       index: 10
     }
   },
+  {
+    path: '/entrance/register',  //注册
+    component: () => import('@/views/entrance/register.vue'),
+    meta: {
+      index: 29
+    }
+  },
+  {
+    path: '/entrance/login',  //注册
+    component: () => import('@/views/entrance/login.vue'),
+    meta: {
+      index: 28
+    }
+  },
 ]
 
 export default new Router({
