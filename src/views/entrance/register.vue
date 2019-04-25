@@ -120,7 +120,7 @@ export default {
           }
         },1000)
 			} else {
-				
+				Toast.fail(resData.data.msg)
 			}
     },
     mobileChange () {
@@ -156,12 +156,18 @@ export default {
       let resData = await uRegister(this.formData)
       if (resData.status === 200 && resData.data.code === 1) {
         Toast.success('注册成功')
-        this.$router.push('/entrance/login')
+        this.$router.push('/login')
       } else {
         Toast.fail(resData.data.msg)
       }
     }
-  }
+  },
+
+  destroyed () {
+    let self = this
+    window.setInterval(self.timeCell)
+    self.timeCell = null
+  },
 }
 </script>
 

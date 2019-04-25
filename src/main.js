@@ -35,6 +35,8 @@ for (let key in vFilters) {
 import MyComponents from './components/index'
 Vue.use(MyComponents)
 
+Vue.prototype.CARDTYPE = 1
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

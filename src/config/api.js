@@ -1,7 +1,14 @@
 import axios from 'axios'
+import { getLocalStore } from '@/utils/storageUtil'
 
 let cancel ,promiseArr = {}
 const CancelToken = axios.CancelToken
+let tokenArray = [
+  '/UserMs/uRegister.do', 
+  '/UserMs/sendValidByReg.do', 
+  '/UserMs/uLogin.do', 
+  '/UserMs/sendValidByPhone.do'
+]
 
 axios.defaults.baseURL = ''
 // axios.defaults.baseURL = process.env.BASE_API
@@ -30,7 +37,8 @@ export default {
   },
   //post请求
   post (url,param) {
-    param.token = 'jiangpeng'
+    param.token = tokenArray.includes(url) ? 'jiangpeng' : JSON.parse(getLocalStore('USER_INFO')).token
+    console.log("======", param.token)
     return new Promise((resolve,reject) => {
       axios({
         method: 'post',

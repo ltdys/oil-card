@@ -34,7 +34,7 @@
         placeholder="手机号">
       </van-field>
       <van-field
-        v-model="formData1.code"
+        v-model="formData1.validCode"
         clearable
         center
         left-icon="coupon-o"
@@ -51,7 +51,7 @@
     <div class="submit_buttons" v-if="loginType === 'code'">
       <van-button type="primary" :disabled="isSubmit1" @click="submit">登录</van-button>
     </div>
-    <div class="login_bottom" @click="$router.push('/entrance/register')">
+    <div class="login_bottom" @click="$router.push('/register')">
       没帐号?立即注册
     </div>
   </com-page>
@@ -60,7 +60,7 @@
 <script>
 import { checkStr, paramsValidate } from '@/utils/typeUtil'
 import validator from '@/utils/validator.js'
-import { uLogin } from '@/service/oilcard.js'
+import { uLogin, sendValidByPhone, sendValidByReg } from '@/service/oilcard.js'
 import { Toast } from 'vant'
 import md5 from 'js-md5'
 export default {
@@ -79,8 +79,9 @@ export default {
         pwd: '',
       },
       formData1: {
+        type: 2,
         mobile: '',
-        code: ''  //验证码
+        validCode: ''  //验证码
       },
       //校验
       rules: {
@@ -124,10 +125,15 @@ export default {
   },
 
   methods: {
-    getAccCode () {//获取验证码
+    async getAccCode () {//获取验证码
       let self = this;
-     
-      if (true) {
+      let param = {
+        mobile: this.formData1.mobile,
+        type: 1
+      }
+      let resData = await sendValidByReg(param)
+      if (resData.status === 200 && resData.data.validCode === 1) {
+        Toast.success(resData.data.msg)
         self.codeText = self.times + 's后重新获取'
         self.isBtnShow = true
         self.timeCell = setInterval(function () {
@@ -144,7 +150,7 @@ export default {
           }
         },1000)
 			} else {
-				
+				Toast.fail(resData.data.msg)
 			}
     },
     validate(callback, data) {
@@ -179,7 +185,7 @@ export default {
       if (this.loginType === 'pwd') {
         this.uLogin()
       } else {
-        
+        this.sendValidByPhone()
       }
     },
     async uLogin () {  //帐号密码登录
@@ -192,8 +198,24 @@ export default {
       } else {
         Toast.fail(resData.data.msg)
       }
+    },
+    async sendValidByPhone () {  //手机发送验证码登录
+      let resData = await sendValidByPhone(this.formData1)
+      if (resData.status === 200 && resData.data.code === 1) {
+        Toast.success('登录成功')
+        this.$store.dispatch('setUserInfo', resData.data.data)
+        this.$router.push('/')
+      } else {
+        Toast.fail(resData.data.msg)
+      }
     }
-  }
+  },
+
+  destroyed () {
+    let self = this
+    window.setInterval(self.timeCell)
+    self.timeCell = null
+  },
 }
 </script>
 

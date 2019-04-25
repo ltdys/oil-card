@@ -178,14 +178,14 @@ export const routes = [{
     }
   },
   {
-    path: '/entrance/register',  //注册
+    path: '/register',  //注册
     component: () => import('@/views/entrance/register.vue'),
     meta: {
       index: 29
     }
   },
   {
-    path: '/entrance/login',  //注册
+    path: '/login',  //注册
     component: () => import('@/views/entrance/login.vue'),
     meta: {
       index: 28
