@@ -37,7 +37,7 @@ export default {
   },
   //post请求
   post (url,param) {
-    param.token = tokenArray.includes(url) ? 'jiangpeng' : getLocalStore('USER_INFO').token
+    param.token = tokenArray.includes(url) ? 'jiangpeng' : getLocalStore('USER_INFO', 'json').token
     console.log("======", param.token)
     return new Promise((resolve,reject) => {
       axios({
