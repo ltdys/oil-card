@@ -42,6 +42,7 @@
 <script>
 import { checkStr, paramsValidate } from '@/utils/typeUtil'
 import validator from "@/utils/validator.js"
+import { sendValidByReg } from '@/service/oilcard.js'
 export default {
   data () {
     return {
@@ -92,9 +93,15 @@ export default {
   },
 
   methods: {
-    getAccCode () {//获取验证码
+    async getAccCode () {//获取验证码
       let self = this;
-     
+      let param = {
+        mobile: this.formData.phone,
+        type: '3'
+      }
+      debugger
+      let resData = await sendValidByReg(param)
+      console.log("resData", resData)
       if (true) {
         self.codeText = self.times + 's后重新获取'
         self.isBtnShow = true

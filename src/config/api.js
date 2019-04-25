@@ -3,8 +3,9 @@ import axios from 'axios'
 let cancel ,promiseArr = {}
 const CancelToken = axios.CancelToken
 
-// axios.defaults.baseURL = ''
-axios.defaults.baseURL = process.env.BASE_API
+axios.defaults.baseURL = ''
+// axios.defaults.baseURL = process.env.BASE_API
+
 
 //设置默认请求头
 axios.defaults.headers = {
@@ -29,6 +30,7 @@ export default {
   },
   //post请求
   post (url,param) {
+    param.token = 'jiangpeng'
     return new Promise((resolve,reject) => {
       axios({
         method: 'post',

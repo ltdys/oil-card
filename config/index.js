@@ -18,6 +18,13 @@ module.exports = {
             '^/api': ''   //需要rewrite重写的,
         }
       },
+      '/UserMs': {
+        target: 'http://120.77.248.38/beatle',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/UserMs': '/UserMs'
+        }
+      }
     },
 
     // Various Dev Server settings
