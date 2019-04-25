@@ -26,7 +26,7 @@ import {
   Picker,
   CouponCell,
   CouponList,
-  Checkbox, CheckboxGroup 
+  Checkbox, CheckboxGroup
 } from 'vant'
 
 const components = [

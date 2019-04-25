@@ -8,7 +8,7 @@
 
     <div class="login_form" v-if="loginType === 'pwd'">
       <van-field
-        v-model="formData.phone"
+        v-model="formData.mobile"
         type="tel"
         clearable
         left-icon="user-o"
@@ -26,11 +26,11 @@
 
     <div class="login_form" v-if="loginType === 'code'">
       <van-field
-        v-model="formData1.phone"
+        v-model="formData1.mobile"
         type="tel"
         clearable
         left-icon="user-o"
-        @input="phoneChange"
+        @input="mobileChange"
         placeholder="手机号">
       </van-field>
       <van-field
@@ -59,7 +59,10 @@
 
 <script>
 import { checkStr, paramsValidate } from '@/utils/typeUtil'
-import validator from "@/utils/validator.js"
+import validator from '@/utils/validator.js'
+import { uLogin } from '@/service/oilcard.js'
+import { Toast } from 'vant'
+import md5 from 'js-md5'
 export default {
   data () {
     return {
@@ -72,16 +75,16 @@ export default {
       isSubmit1: true,  //验证码登录
       loginType: 'pwd',  //登录方式  pwd--密码  code--验证码
       formData: {
-        phone: '',
+        mobile: '',
         pwd: '',
       },
       formData1: {
-        phone: '',
+        mobile: '',
         code: ''  //验证码
       },
       //校验
       rules: {
-        phone: [
+        mobile: [
           {
             validator: (rule, value, callback) => {
               if (!value) {
@@ -96,7 +99,7 @@ export default {
         ],
       },
       errorMsg: {
-        phone: ''
+        mobile: ''
       },
     }
   },
@@ -165,15 +168,30 @@ export default {
         this.errorMsg[attr] = "";
       });
     },
-    phoneChange () {
-      if (this.formData1.phone != '' && checkStr(this.formData1.phone, 'phone')) {
+    mobileChange () {
+      if (this.formData1.mobile != '' && checkStr(this.formData1.mobile, 'phone')) {
         this.isBtnShow = false
       } else {
         this.isBtnShow = true
       }
     },
     submit () {
-
+      if (this.loginType === 'pwd') {
+        this.uLogin()
+      } else {
+        
+      }
+    },
+    async uLogin () {  //帐号密码登录
+      this.formData.pwd = md5(this.formData.pwd)
+      let resData = await uLogin(this.formData)
+      if (resData.status === 200 && resData.data.code === 1) {
+        Toast.success('登录成功')
+        this.$store.dispatch('setUserInfo', resData.data.data)
+        this.$router.push('/')
+      } else {
+        Toast.fail(resData.data.msg)
+      }
     }
   }
 }
