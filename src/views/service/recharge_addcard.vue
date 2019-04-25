@@ -51,6 +51,7 @@ import validator from "@/utils/validator.js"
 export default {
   data() {
     return {
+      validator: undefined,  //验证对象
       formData: {
         cardType: '中国石化',  //油卡类型
         card: '',  //卡号
