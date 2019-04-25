@@ -11,6 +11,7 @@
         clearable
         left-icon="user-o"
         @input="mobileChange"
+        :error-message="errorMsg.mobile"
         placeholder="手机号">
       </van-field>
       <van-field
@@ -151,7 +152,16 @@ export default {
         this.errorMsg[attr] = "";
       });
     },
-    async submit () {
+    submit () {
+      this.validate(error => {
+				if (!error) {
+          this.register()
+				}
+      }, this.formData)
+
+      
+    },
+    async register () {
       this.formData.pwd = md5(this.formData.pwd)
       let resData = await uRegister(this.formData)
       if (resData.status === 200 && resData.data.code === 1) {

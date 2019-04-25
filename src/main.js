@@ -5,6 +5,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import '@/config/api'
+import './permission'
 
 import Vuex from 'vuex'
 import axios from 'axios'
