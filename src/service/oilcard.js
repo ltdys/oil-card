@@ -14,3 +14,9 @@ export const sendValidByPhone = params => axios.post('/UserMs/sendValidByPhone.d
 
 //油卡绑定
 export const bindCard = params => axios.post('/UserMs/bindCard.do', params)
+
+//用户信息查询
+export const uUserInfo = params => axios.post('/UserMs/userInfo.do', params)
+
+//更新个人昵称或头像等信息
+export const uUpdateUserInfo = params => axios.post('/UserMs/updateUserInfo.do', params)
