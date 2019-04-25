@@ -132,7 +132,7 @@ export default {
         type: 1
       }
       let resData = await sendValidByReg(param)
-      if (resData.status === 200 && resData.data.validCode === 1) {
+      if (resData.status === 200 && resData.data.code === 1) {
         Toast.success(resData.data.msg)
         self.codeText = self.times + 's后重新获取'
         self.isBtnShow = true

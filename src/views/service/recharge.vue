@@ -100,7 +100,11 @@ const coupon = {
   valueDesc: '1.5',
   unitDesc: '元'
 }
+import { bindCardList } from '@/service/oilcard.js'
+import { list_mixins } from '@/mixins'
 export default {
+  mixins: [list_mixins],
+
   data() {
     return {
       hasCard: true,
@@ -154,6 +158,7 @@ export default {
   created() {
     this.payment = this.list[0].payment
     this.less = this.list[0].less
+    this.bindCardList()
   },
   methods: {
     clickPanel (item) {
@@ -181,6 +186,18 @@ export default {
       this.popupShow = false
       this.iconName = 'arrow-down'
       this.card = name
+    },
+    async bindCardList () {
+      let param = {
+        mobile: this.userInfo.mobile
+      }
+      let resData = await bindCardList(param)
+      if (resData.status === 200 && resData.data.code === 1) {
+        this.pupupList = resData.data.data || []
+        if (this.pupupList.length > 0) {
+          this.card = this.pupupList[0].card
+        }
+      }
     }
   }
 };

@@ -20,3 +20,9 @@ export const uUserInfo = params => axios.post('/UserMs/userInfo.do', params)
 
 //更新个人昵称或头像等信息
 export const uUpdateUserInfo = params => axios.post('/UserMs/updateUserInfo.do', params)
+
+//查询用户已绑定油卡列表
+export const bindCardList = params => axios.post('/UserMs/bindCardList.do', params)
+
+//油卡解绑
+export const unbindCard = params => axios.post('/UserMs/unbindCard.do', params)
