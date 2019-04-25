@@ -1,11 +1,16 @@
+import { Toast } from 'vant';
+import { rules, errorMsg } from '@/utils/dataUtil'
 import { uUserInfo } from '@/service/oilcard.js'
 export const list_mixins = {
   data () {
     return {
+      validator: undefined,  //验证对象
       pageIndex:1,
       pageSize:20,
       resultList:[],
-      finished:false
+      finished:false,
+      rules: rules,
+      errorMsg: errorMsg,
     }
   },
 
@@ -22,12 +27,19 @@ export const list_mixins = {
     async getUserInfo () { //获取个人用户信息
       let self = this;
       let param = {
-        mobile: self.userInfo.mobile,
-        token: self.userInfo.token
+        mobile: self.userInfo.mobile
       }
-      console.log(self.userInfo)
       let resData = await uUserInfo(param)
       console.log('resData',resData)
+      if (resData.status === 200 && resData.data.code === 1) {
+        let userInfo = resData.data.data;
+        self.$store.dispatch('setUserInfo', userInfo)
+      } else {
+        Toast.fail({
+          message: resData.data.msg,
+          duration: 1500
+        })
+      }
     },
     loadTop() {
       return new Promise(r=>{
@@ -48,6 +60,37 @@ export const list_mixins = {
         this.$refs.loadmore && this.$refs.loadmore.onBottomLoaded();
         return res
       })
-    }
+    },
+    validate(callback, data) {
+      this.validator.validate((errors, fields) => {
+        this.resetField();
+        if (errors) {
+          fields.forEach(item => {
+            this.errorMsg[item.field] = item.message;
+          });
+        }
+        callback && callback(errors, fields);
+      }, data);
+    },
+    oneValidate (data) {
+      this.validator.validate((errors, fields) => {
+        this.resetField();
+        if (errors) {
+          fields.forEach(item => {
+            this.errorMsg[item.field] = item.message;
+          });
+        }
+      }, data);
+    },
+    resetField(attrs) {
+      attrs = !attrs
+        ? Object.keys(this.errorMsg)
+        : Array.isArray(attrs)
+        ? attrs
+        : [attrs];
+      attrs.forEach(attr => {
+        this.errorMsg[attr] = "";
+      });
+		}
   }
 }

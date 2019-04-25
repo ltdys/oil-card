@@ -36,10 +36,10 @@ export default {
         data: form
       })
       .then(res => {
-        console.log('成功返回',res)
+        console.log('图片上传成功返回',res)
         userInfo.headImage = v.content
         self.$store.dispatch('setUserInfo', userInfo)
-        self.getUserInfo()
+        // self.getUserInfo()
       })
       .catch(err => {
         console.log('失败返回',err)

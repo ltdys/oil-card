@@ -9,6 +9,7 @@
 </template>
 
 <script>
+import { Toast } from 'vant';
 import { list_mixins } from "@/mixins";
 import { uUpdateUserInfo } from '@/service/oilcard.js'
 export default {
@@ -21,12 +22,12 @@ export default {
   },
   created() {
     let self = this;
-    self.niceName = self.userInfo.userName
+    self.niceName = self.userInfo.nickName
   },
   watch: {
     niceName: {
       handler: function (val, old) {
-        if (val == '' || val == this.userInfo.userName) {
+        if (val == '' || val == this.userInfo.nickName) {
           this.isBtnShow = true
         } else {
           this.isBtnShow = false
@@ -41,9 +42,24 @@ export default {
       let param = {
         id: self.userInfo.id,
         nickName: self.niceName,
-        token: self.userInfo.token
       }
-
+      let resData = await uUpdateUserInfo(param)
+      console.log('resData',resData)
+      if (resData.status === 200 && resData.data.code === 1) {
+        Toast.success({
+          message: resData.data.msg,
+          duration: 1500
+        })
+        self.getUserInfo()
+        self.$nextTick(()=>{
+          self.$router.back()
+        })
+      } else {
+        Toast.fail({
+          message: resData.data.msg,
+          duration: 1500
+        })
+      }
     }
   }
 };

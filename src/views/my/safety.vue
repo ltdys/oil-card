@@ -6,14 +6,16 @@
     <van-cell title="证件照片" class="zjzp-cell">
       <van-uploader :after-read="frontImg" accept="image/gif, image/jpeg, image/png">
         <div class="zjzp-cell_box" v-if="safetyInfo.IDfront == ''">
-          <img class="zjzp-cell_icon" src="static/images/icon/add_icon.png" alt="">
+          <!-- <img class="zjzp-cell_icon" src="static/images/icon/add_icon.png" alt=""> -->
+          <van-icon class="zjzp-cell_icon" size="38px" name="plus" />
           <div class="zjzp-cell_text">身份证正面照片</div>
         </div>
         <img class="zjzp-cell_img" v-else :src="safetyInfo.IDfront" alt="">
       </van-uploader>
       <van-uploader :after-read="versoImg" accept="image/gif, image/jpeg, image/png">
         <div @click="updataImg('2')" class="zjzp-cell_box" v-if="safetyInfo.IDverso == ''">
-          <img class="zjzp-cell_icon" src="static/images/icon/add_icon.png" alt="">
+          <!-- <img class="zjzp-cell_icon" src="static/images/icon/add_icon.png" alt=""> -->
+          <van-icon class="zjzp-cell_icon" size="38px" name="plus" />
           <div class="zjzp-cell_text">身份证反面照片</div>
         </div>
         <img class="zjzp-cell_img" v-else :src="safetyInfo.IDverso" alt="">
