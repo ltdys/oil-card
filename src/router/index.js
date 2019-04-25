@@ -214,6 +214,13 @@ export const routes = [{
       index: 28
     }
   },
+  {
+    path: '/forgetpwd',  //忘记密码
+    component: () => import('@/views/entrance/forgetpwd.vue'),
+    meta: {
+      index: 29
+    }
+  }
 ]
 
 export default new Router({

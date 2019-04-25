@@ -21,7 +21,10 @@
         left-icon="bag-o"
         placeholder="输入密码">
       </van-field>
-      <div class="login_form__text" @click="loginType = 'code'">短信验证码 登录</div>
+      <div class="login_form__formbtn">
+        <div class="login_form__formbtn___text" @click="loginType = 'code'">短信验证码 登录</div>
+        <div class="login_form__formbtn___forget" @click="$router.push('/forgetpwd')">忘记密码?</div>
+      </div>
     </div>
 
     <div class="login_form" v-if="loginType === 'code'">
@@ -43,7 +46,9 @@
           {{codeText}}
         </van-button>
       </van-field>
-      <div class="login_form__text" @click="loginType = 'pwd'">输入密码 登录</div>
+      <div class="login_form__formbtn">
+        <div class="login_form__formbtn___text" @click="loginType = 'pwd'">输入密码 登录</div>
+      </div>
     </div>
     <div class="submit_buttons" v-if="loginType === 'pwd'">
       <van-button type="primary" :disabled="isSubmit" @click="submit">登录</van-button>
@@ -79,7 +84,7 @@ export default {
         pwd: '',
       },
       formData1: {
-        type: 2,
+        type: 200,
         mobile: '',
         validCode: ''  //验证码
       },
@@ -131,7 +136,7 @@ export default {
         mobile: this.formData1.mobile,
         type: 1
       }
-      let resData = await sendValidByReg(param)
+      let resData = await sendValidByPhone(param)
       if (resData.status === 200 && resData.data.code === 1) {
         Toast.success(resData.data.msg)
         self.codeText = self.times + 's后重新获取'
@@ -230,11 +235,23 @@ export default {
     }
     &_form {
       padding: 0 0.29rem;
-      &__text {
-        margin-top: 11px;
+      &__text1 {
         margin-left: 3px;
         color: #a0a0a0;
         font-size: 15px;
+      }
+      &__formbtn {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 11px;
+        &___text {
+          margin-left: 3px;
+          color: #a0a0a0;
+          font-size: 15px;
+        }
+        &___forget {
+          color: #55ADFC;
+        }
       }
     }
     &_bottom {
