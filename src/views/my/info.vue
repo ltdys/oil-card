@@ -32,6 +32,7 @@ export default {
       form.append("file", v.file);
       self.$axios({
         method: 'post',
+        headers: { 'content-type': 'application/x-www-form-urlencoded' },
         url: '/FileUpload/uploadAppPic.do',
         data: form
       })
