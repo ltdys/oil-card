@@ -35,7 +35,7 @@ export default {
       axios({
         method: 'post',
         url,
-        params: param,
+        data: param,
         cancelToken: new CancelToken(c => {
           cancel = c
         })
