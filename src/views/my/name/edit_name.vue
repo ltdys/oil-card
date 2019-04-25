@@ -10,6 +10,7 @@
 
 <script>
 import { list_mixins } from "@/mixins";
+import { uUpdateUserInfo } from '@/service/oilcard.js'
 export default {
   mixins: [list_mixins],
   data() {
@@ -35,8 +36,14 @@ export default {
     }
   },
   methods: {
-    confireBtn () { //确定事件
+    async confireBtn () { //确定修改用户昵称
       let self = this;
+      let param = {
+        id: self.userInfo.id,
+        nickName: self.niceName,
+        token: self.userInfo.token
+      }
+
     }
   }
 };

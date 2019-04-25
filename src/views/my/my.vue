@@ -2,9 +2,9 @@
   <com-page class="my">
     <com-header title="我的" slot="header"></com-header>
     <div class="my_header">
-      <img class="my_header__img" src="static/images/icon/user_defu.png" alt="">
+      <img class="my_header__img" :src="userInfo.headImage | vUserImg" onerror="onerror=null;this.src='static/images/icon/user_defu.png'" alt="">
       <span class="my_header__text">微信昵称：</span>
-      <span class="my_header__name">{{ user_name }}</span>
+      <span class="my_header__name">{{ userInfo.nickName }}</span>
     </div>
     <div class="blank-10"></div>
     <div class="my_user">个人服务</div>
@@ -19,7 +19,9 @@
   </com-page>
 </template>
 <script>
+import { list_mixins } from "@/mixins";
 export default {
+  mixins: [list_mixins],
   components: {
     
   },
@@ -90,6 +92,7 @@ export default {
     &__img{
       width: 50px;
       height: 50px;
+      border-radius: 50%;
     }
     &__text{
       margin: 0 10px;

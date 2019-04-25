@@ -1,11 +1,7 @@
+import { uUserInfo } from '@/service/oilcard.js'
 export const list_mixins = {
   data () {
     return {
-      userInfo: {
-        img: 'static/images/icon/gril3.png',
-        userName: '修身',
-        phone: '18814479161'
-      },
       pageIndex:1,
       pageSize:20,
       resultList:[],
@@ -13,7 +9,26 @@ export const list_mixins = {
     }
   },
 
+  computed:{
+    userInfo: {
+      cache: false,
+      get: function () {
+        return this.$store.getters.getUserInfo
+      }
+    },
+  },
+
   methods: {
+    async getUserInfo () { //获取个人用户信息
+      let self = this;
+      let param = {
+        mobile: self.userInfo.mobile,
+        token: self.userInfo.token
+      }
+      console.log(self.userInfo)
+      let resData = await uUserInfo(param)
+      console.log('resData',resData)
+    },
     loadTop() {
       return new Promise(r=>{
         setTimeout(()=>r(),500)

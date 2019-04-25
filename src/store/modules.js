@@ -25,7 +25,7 @@ const actions = {
 
 const getters = {
   getUserInfo: state => {
-    let status = getLocalStore('USER_INFO')
+    let status = getLocalStore('USER_INFO', 'json')
     if (status) {
       state.userInfo = status
     }
