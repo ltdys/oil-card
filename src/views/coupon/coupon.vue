@@ -7,6 +7,7 @@
       :finished="finished"
       finished-text="没有更多了"
       @load="onLoad"
+      v-if="list.length > 0"
     >
       <van-cell v-for="(item, index) in list" :key="index">
         <div class="coupon_img">
@@ -22,6 +23,11 @@
         </div>
       </van-cell>
     </van-list>
+
+    <div class="coupon_default" v-else>
+      <div><img src="static/images/icon/coupon_defu.png" alt=".."></div>
+      <div>暂时没有优惠券</div>
+    </div>
   </com-page>
 </template>
 
@@ -72,6 +78,24 @@ export default {
         line-height: 25px;
         font-size: 13px;
         text-align: center;
+      }
+    }
+    &_default {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      color: #9AAEC0;
+      font-size: 15px;
+      div:nth-child(1) {
+        margin-top: 50%;
+      }
+      div:nth-child(2) {
+        margin-top: 14px;
+      }
+      img {
+        width: 139px;
+        height: 84px;
       }
     }
   }
