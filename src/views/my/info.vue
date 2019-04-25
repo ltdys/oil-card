@@ -13,6 +13,7 @@
 
 <script>
 import { list_mixins } from "@/mixins";
+import { uploadAppPic } from '@/service/oilcard.js'
 export default {
   mixins: [list_mixins],
   data() {
@@ -25,10 +26,22 @@ export default {
   },
   methods: {
     onRead (v) { //图片切换
-			console.log(v)
-			let self = this;
-			self.userInfo.img = v.content
-		},
+      let self = this;
+      let form = new FormData();
+      form.append("file", v.file);
+      self.userInfo.img = v.content
+      self.$axios({
+        method: 'post',
+        url: '/FileUpload/uploadAppPic.do',
+        data: form
+      })
+      .then(res => {
+        console.log('成功返回',res)
+      })
+      .catch(err => {
+        console.log('失败返回',err)
+      });
+    }
   }
 };
 </script>

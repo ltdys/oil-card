@@ -24,7 +24,14 @@ module.exports = {
         pathRewrite: {
           '^/UserMs': '/UserMs'
         }
-      }
+      },
+      '/FileUpload': {
+        target: 'http://120.77.248.38/beatle',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/FileUpload': '/FileUpload'
+        }
+      },
     },
 
     // Various Dev Server settings
