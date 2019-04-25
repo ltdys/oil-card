@@ -5,12 +5,12 @@
     <div class="register_title">新用户注册</div>
     <div class="register_form">
       <van-field
-        v-model="formData.phone"
+        v-model="formData.mobile"
         type="tel"
         required
         clearable
         left-icon="user-o"
-        @input="phoneChange"
+        @input="mobileChange"
         placeholder="手机号">
       </van-field>
       <van-field
@@ -22,7 +22,7 @@
         placeholder="输入密码">
       </van-field>
       <van-field
-        v-model="formData.code"
+        v-model="formData.validCode"
         required
         center
         clearable
@@ -42,7 +42,9 @@
 <script>
 import { checkStr, paramsValidate } from '@/utils/typeUtil'
 import validator from "@/utils/validator.js"
-import { sendValidByReg } from '@/service/oilcard.js'
+import { sendValidByReg, uRegister } from '@/service/oilcard.js'
+import { Toast } from 'vant'
+import md5 from 'js-md5'
 export default {
   data () {
     return {
@@ -53,13 +55,13 @@ export default {
       timeCell: null,
       isSubmit: true,
       formData: {
-        phone: '',
+        mobile: '',
         pwd: '',
-        code: ''  //验证码
+        validCode: ''  //验证码
       },
       //校验
       rules: {
-        phone: [
+        mobile: [
           {
             validator: (rule, value, callback) => {
               if (!value) {
@@ -74,7 +76,7 @@ export default {
         ],
       },
       errorMsg: {
-        phone: ''
+        mobile: ''
       },
     }
   },
@@ -96,13 +98,12 @@ export default {
     async getAccCode () {//获取验证码
       let self = this;
       let param = {
-        mobile: this.formData.phone,
+        mobile: this.formData.mobile,
         type: '3'
       }
-      debugger
       let resData = await sendValidByReg(param)
-      console.log("resData", resData)
-      if (true) {
+      if (resData.status === 200 && resData.data.code === 1) {
+        Toast.success(resData.data.msg)
         self.codeText = self.times + 's后重新获取'
         self.isBtnShow = true
         self.timeCell = setInterval(function () {
@@ -122,8 +123,8 @@ export default {
 				
 			}
     },
-    phoneChange () {
-      if (this.formData.phone != '' && checkStr(this.formData.phone, 'phone')) {
+    mobileChange () {
+      if (this.formData.mobile != '' && checkStr(this.formData.mobile, 'phone')) {
         this.isBtnShow = false
       } else {
         this.isBtnShow = true
@@ -150,8 +151,15 @@ export default {
         this.errorMsg[attr] = "";
       });
     },
-    submit () {
-
+    async submit () {
+      this.formData.pwd = md5(this.formData.pwd)
+      let resData = await uRegister(this.formData)
+      if (resData.status === 200 && resData.data.code === 1) {
+        Toast.success('注册成功')
+        this.$router.push('/entrance/login')
+      } else {
+        Toast.fail(resData.data.msg)
+      }
     }
   }
 }
