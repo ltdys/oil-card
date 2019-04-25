@@ -12,8 +12,9 @@
 </template>
 
 <script>
+import { Toast } from 'vant';
 import { list_mixins } from "@/mixins";
-import { uploadAppPic } from '@/service/oilcard.js'
+import { uploadAppPic, uUpdateUserInfo } from '@/service/oilcard.js'
 export default {
   mixins: [list_mixins],
   data() {
@@ -27,7 +28,6 @@ export default {
   methods: {
     onRead (v) { //图片切换
       let self = this;
-      let userInfo = self.userInfo
       let form = new FormData();
       form.append("file", v.file);
       self.$axios({
@@ -38,13 +38,36 @@ export default {
       })
       .then(res => {
         console.log('图片上传成功返回',res)
-        userInfo.headImage = v.content
-        self.$store.dispatch('setUserInfo', userInfo)
+        let headImage = self.HEAD_IMAGE_PR + res.data
+        self.amendUserInfo(headImage)
+        // userInfo.headImage = v.content
+        // self.$store.dispatch('setUserInfo', userInfo)
         // self.getUserInfo()
       })
       .catch(err => {
         console.log('失败返回',err)
       });
+    },
+    async amendUserInfo (img) {
+      let self = this;
+      let param = {
+        id: self.userInfo.id,
+        headImage: img,
+      }
+      let resData = await uUpdateUserInfo(param)
+      console.log('resData',resData)
+      if (resData.status === 200 && resData.data.code === 1) {
+        Toast.success({
+          message: resData.data.msg,
+          duration: 1500
+        })
+        self.getUserInfo()
+      } else {
+        Toast.fail({
+          message: resData.data.msg,
+          duration: 1500
+        })
+      }
     }
   }
 };

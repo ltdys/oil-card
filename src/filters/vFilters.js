@@ -11,6 +11,9 @@ const vFilter = {
   vTelPhone: str => { //手机号断层显示
     return str.substr(0,3) + ' ' + str.substr(3,4) + ' ' + str.substr(7)
   },
+  vIdCard: str => { //身份证号断层显示
+    return str.substr(0,3) + ' ' + str.substr(3,3) + ' ' + str.substr(6,4) + ' ' + str.substr(10,4) + ' ' + str.substr(14)
+  },
   vUserImg: value => { //用户头像
     if (!value) { value = 'static/images/icon/user_defu.png' }
     return value

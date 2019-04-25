@@ -1,4 +1,5 @@
 import { checkStr } from '@/utils/typeUtil'
+import { getLocalStore } from '@/utils/storageUtil'
 export const rules = { //验证规则集合
   mobile: [ //验证手机号
     {
@@ -16,8 +17,12 @@ export const rules = { //验证规则集合
   IDCord: [ //验证身份证号
     {
       validator: (rule, value, callback) => {
+        console.log()
+        let oldCard = getLocalStore('USER_INFO', 'json').idCard || ''
         if (!value) {
           callback("请输入身份证号");
+        } else if (oldCard != '' && value != oldCard) {
+          callback("您输入的不是持卡人身份证号");
         } else if (checkStr(value, 'card')) {
           callback();
         } else {
@@ -37,10 +42,22 @@ export const rules = { //验证规则集合
       }
     }
   ],
+  realname: [ //验证真实姓名
+    {
+      validator: (rule, value, callback) => {
+        if (!value) {
+          callback("填写本人真实姓名");
+        } else {
+          callback();
+        }
+      }
+    }
+  ],
 }
 
 export var errorMsg = {
   mobile: '', //手机号错误提醒字段
   IDCord: '', //身份证号错误提醒字段
   verCode: '', //验证码错误提醒字段
+  realname: '', //真实姓名错误提醒字段
 }

@@ -37,6 +37,7 @@ import MyComponents from './components/index'
 Vue.use(MyComponents)
 
 Vue.prototype.CARDTYPE = 1
+Vue.prototype.HEAD_IMAGE_PR = 'http://120.77.248.38/beatle'
 
 /* eslint-disable no-new */
 new Vue({

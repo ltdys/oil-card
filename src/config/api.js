@@ -38,6 +38,9 @@ export default {
   //post请求
   post (url,param) {
     param.token = tokenArray.includes(url) ? 'jiangpeng' : getLocalStore('USER_INFO', 'json').token
+    if (url == '/UserMs/sendValidByReg.do' && (param.type == 4 || param.type == 5)) {
+      param.token = getLocalStore('USER_INFO', 'json').token
+    }
     console.log("======", param.token)
     return new Promise((resolve,reject) => {
       axios({

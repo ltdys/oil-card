@@ -64,13 +64,12 @@ export default {
     };
   },
   created() {
+    this.editPhone.IDCord = this.userInfo.idCard
     this.validator = validator(this.rules, this.editPhone)
   },
   watch: {
     editPhone: {
       handler: function (val, old) {
-        console.log('val---',val)
-        console.log('val---222',paramsValidate(val))
         this.isBtnShow = !paramsValidate(val)
       },
       deep: true
@@ -87,13 +86,13 @@ export default {
     async sendPhoneCode () { //发送手机验证码
       let self = this;
       let param = {
-        mobile: self.editPhone.mobile,
+        mobile: self.userInfo.mobile,
         type: 5
       }
       let resData = await sendValidByReg(param)
       if (resData.status === 200 && resData.data.code === 1) {
         Toast.success({
-          message: resData.data.msg,
+          message: resData.data.msg || '发送验证码成功',
           duration: 1500
         })
         self.codeText = self.times + 's后重新获取'
@@ -131,9 +130,10 @@ export default {
       let param = {
         id: self.userInfo.id,
         idCard: self.editPhone.IDCord,
-        mobile: self.editPhone.newPhone,
+        mobile: self.editPhone.mobile,
         validCode: self.editPhone.verCode
       }
+      console.log(param)
       let resData = await uUpdateUserMobile(param)
       console.log('resData',resData)
       if (resData.status === 200 && resData.data.code === 1) {
@@ -141,9 +141,9 @@ export default {
           message: resData.data.msg,
           duration: 1500
         })
-        self.getUserInfo()
+        // self.getUserInfo()
         self.$nextTick(()=>{
-          self.$router.back()
+          self.$router.push('/login')
         })
       } else {
         Toast.fail({
