@@ -72,6 +72,7 @@ export default {
         mobile: ''
       },
       isSubmit: true,
+      validator: undefined,  //验证对象
     };
   },
 
