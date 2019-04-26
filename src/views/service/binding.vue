@@ -135,6 +135,7 @@ export default {
       let resData = await bindCard(param)
       if (resData.status === 200 && resData.data.code === 1) {
         Toast.success('油卡绑定成功')
+        this.$router.back()
       } else {
         Toast(resData.data.msg)
       }

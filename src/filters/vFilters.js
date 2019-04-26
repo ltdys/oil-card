@@ -23,7 +23,7 @@ const vFilter = {
     return parseFloat(value).toFixed(2)
   },
   vUpperCase: value => { //转化大写
-    if (!value) { value = '' }
+    if (!value) { value = '暂无' }
     return value.toUpperCase()
   },
   vLowerCase: value => { //转化小写

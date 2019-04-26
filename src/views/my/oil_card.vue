@@ -5,14 +5,14 @@
       <van-swipe-item v-for="(item, index) in oilcardList" :key="index">
         <div class="oil_box">
           <img class="my_oil_img" v-lazy="item.img"/>
-          <div class="oil_box_ye">
+          <div class="oil_box_ye" v-show="item.money != null && item.money !== ''">
             <div>当前余额</div>
             <div class="oil_box_ye_mon">{{ item.money | vFixedTwo }}</div>
           </div>
           <div class="oil_box_bm">{{ item.code | vUpperCase }}</div>
           <div class="oil_box_zt">
-            <img v-if="item.status == 0" src="static/images/icon/encrypt.png" alt="">
-            <img v-else-if="item.status == 1" src="static/images/icon/lose.png" alt="" @click="oilCardClick(item)">
+            <img v-if="item.status == 2" src="static/images/icon/encrypt.png" alt="">
+            <img v-else-if="item.status == 3" src="static/images/icon/lose.png" alt="" @click="oilCardClick(item)">
           </div>
         </div>
       </van-swipe-item>
@@ -25,19 +25,24 @@
       color="#313131"
       :line-width="31">
       <van-tab v-for="(item, index) in tabList" :key="index" :title="item.title">
-        <div class="oil_cons" v-for="(val, ind) in item.list" :key="ind" @click="jumpDetail(val, item)">
-          <img v-if="currentTab == 0" src="static/images/icon/oil_czjl.png" alt="">
-          <img v-else-if="currentTab == 1" src="static/images/icon/oil_xfjl.png" alt="">
-          <div class="oil_cons_left">
-            <div class="oil_cons_left_title">{{ val.title }}</div>
-            <div class="oil_cons_left_order">订单号：{{ val.orderId }}</div>
-          </div>
-          <div class="oil_cons_right">
-            <div class="oil_cons_right_sum" :class="[currentTab == 0 ? 'color_red' : 'color_blue']">
-              <span v-show="currentTab == 1">-</span>{{ val.sum | vMoneyChange }}
+        <div v-if="item.list.length != 0">
+          <div class="oil_cons" v-for="(val, ind) in item.list" :key="ind" @click="jumpDetail(val, item)">
+            <img v-if="currentTab == 0" src="static/images/icon/oil_czjl.png" alt="">
+            <img v-else-if="currentTab == 1" src="static/images/icon/oil_xfjl.png" alt="">
+            <div class="oil_cons_left">
+              <div class="oil_cons_left_title">{{ val.title }}</div>
+              <div class="oil_cons_left_order">订单号：{{ val.orderId }}</div>
             </div>
-            <div class="oil_cons_right_time">{{ val.time }}</div>
+            <div class="oil_cons_right">
+              <div class="oil_cons_right_sum" :class="[currentTab == 0 ? 'color_red' : 'color_blue']">
+                <span v-show="currentTab == 1">-</span>{{ val.sum | vMoneyChange }}
+              </div>
+              <div class="oil_cons_right_time">{{ val.time }}</div>
+            </div>
           </div>
+        </div>
+        <div class="no-data-sty" v-else>
+          暂无{{ item.title }}
         </div>
       </van-tab>
     </van-tabs>
@@ -54,93 +59,56 @@ export default {
     return {
       swipeWid: 0, //轮播主图的宽度
       swipeHei: 0, //轮播主图的高度
-      oilcardList: [
-        {
-          img: 'static/images/icon/oil_1.png',
-          money: '980',
-          code: 'no59895113564789',
-          status: 0
-        }, {
-          img: 'static/images/icon/oil_2.png',
-          money: '980',
-          code: 'no59895113564789',
-          status: 0
-        }, {
-          img: 'static/images/icon/oil_3.png',
-          money: '980',
-          code: 'no59895113564789',
-          status: 1
-        }, {
-          img: 'static/images/icon/oil_4.png',
-          money: '980',
-          code: 'no59895113564789',
-          status: 0
-        }, {
-          img: 'static/images/icon/oil_5.png',
-          money: '980',
-          code: 'no59895113564789',
-          status: 1
-        }, {
-          img: 'static/images/icon/oil_6.png',
-          money: '980',
-          code: 'no59895113564789',
-          status: 0
-        }, {
-          img: 'static/images/icon/oil_7.png',
-          money: '980',
-          code: 'no59895113564789',
-          status: 0
-        }
-      ],
+      oilcardList: [],
       currentTab: 0, //当前tab
       tabList: [
         {
           index: 0,
           title: '充值记录',
           list: [
-            {
-              title: '充值成功',
-              id: '45656564892143',
-              name: '加油卡充值',
-              sum: '100',
-              orderId: '21554860',
-              time: '2018.04.01 12:00',
-              type: '支付宝',
-              state: '付款成功'
-            }, {
-              title: '充值失败',
-              id: '45656564892143',
-              name: '加油卡充值',
-              sum: '100',
-              orderId: '21554860',
-              time: '2018.04.01 12:00',
-              type: '微信',
-              state: '付款失败'
-            }, 
+            // {
+            //   title: '充值成功',
+            //   id: '45656564892143',
+            //   name: '加油卡充值',
+            //   sum: '100',
+            //   orderId: '21554860',
+            //   time: '2018.04.01 12:00',
+            //   type: '支付宝',
+            //   state: '付款成功'
+            // }, {
+            //   title: '充值失败',
+            //   id: '45656564892143',
+            //   name: '加油卡充值',
+            //   sum: '100',
+            //   orderId: '21554860',
+            //   time: '2018.04.01 12:00',
+            //   type: '微信',
+            //   state: '付款失败'
+            // }, 
           ]
         }, {
           index: 1,
           title: '消费记录',
           list: [
-            {
-              title: '油卡充值消费',
-              id: '45656564892143',
-              name: '加油卡消费',
-              sum: '100',
-              orderId: '21554860',
-              time: '2018.04.01 12:00',
-              type: '微信',
-              state: '付款成功'
-            }, {
-              title: '油卡充值消费',
-              id: '45656564892143',
-              name: '加油卡消费',
-              sum: '100',
-              orderId: '21554860',
-              time: '2018.04.01 12:00',
-              type: '支付宝',
-              state: '付款失败'
-            }, 
+            // {
+            //   title: '油卡充值消费',
+            //   id: '45656564892143',
+            //   name: '加油卡消费',
+            //   sum: '100',
+            //   orderId: '21554860',
+            //   time: '2018.04.01 12:00',
+            //   type: '微信',
+            //   state: '付款成功'
+            // }, {
+            //   title: '油卡充值消费',
+            //   id: '45656564892143',
+            //   name: '加油卡消费',
+            //   sum: '100',
+            //   orderId: '21554860',
+            //   time: '2018.04.01 12:00',
+            //   type: '支付宝',
+            //   state: '付款失败'
+            // }, 
           ]
         }
       ]
@@ -163,7 +131,25 @@ export default {
       console.log('resData',resData)
       if (resData.status === 200 && resData.data.code === 1) {
         let list = resData.data.data;
-        // self.oilcardList = list
+        if (list.length == 0) {
+          let obj = {
+            img: 'static/images/icon/oil_4.png',
+            money: '',
+            code: '',
+            status: 2
+          }
+          self.oilcardList.push(obj)
+        } else {
+          list.forEach((item, index) => {
+            let obj = {
+              img: 'static/images/icon/oil_' + item.status + '.png',
+              money: item.balance,
+              code: item.cardNo,
+              status: item.status
+            }
+            self.oilcardList.push(obj)
+          })
+        }
       } else {
         Toast({
           message: resData.data.msg,
@@ -273,10 +259,18 @@ export default {
 
   .van-swipe{
     padding-left: 30px;
+    padding-top: 16px ;
+    padding-bottom: 16px;
     box-sizing: border-box;
     .van-swipe-item{
       padding-right: 10px;
     }
+  }
+  .no-data-sty{
+    text-align: center;
+    font-size: 14px;
+    color: #A0A0A0;
+    margin-top: 20px;
   }
 }
 </style>
