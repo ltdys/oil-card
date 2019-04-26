@@ -2,7 +2,7 @@
   <com-page class="recharge">
     <com-header title="油卡充值" is-back slot="header"></com-header>
     
-    <template v-if="hasCard">
+    <template v-if="pupupList.length > 0">
       <div class="recharge_top">
         <div><img src="static/images/icon/card.png" alt=".." class="recharge_top__img"></div>
         <div>{{card}}</div>
@@ -75,9 +75,9 @@
         style="z-index: 2000">
         <div v-for="(item, index) in pupupList" :key="index" class="recharge_popup">
           <div><img src="static/images/icon/card.png" alt=".."></div>
-          <div>{{item.card}}</div>
+          <div>{{item.cardNo}}</div>
           <van-radio-group v-model="radio" @change="radioChange">
-            <van-radio :name="item.card" />
+            <van-radio :name="item.cardNo" />
           </van-radio-group>
         </div>
       </van-popup>
@@ -108,7 +108,7 @@ export default {
   data() {
     return {
       hasCard: true,
-      card: 'NO1000114500001332537',  //油卡卡号
+      card: '',  //油卡卡号
       iconName: 'arrow-down',  //icon图标
       checked: false,
       popupShow: false,
@@ -134,19 +134,7 @@ export default {
       }],
       payment: '',
       less: '',
-      pupupList: [{
-        card: 'NO 1000114500001332537',
-        isCheck: false
-      }, {
-        card: 'NO 1000114500001332538',
-        isCheck: false
-      }, {
-        card: 'NO 1000114500001332539',
-        isCheck: false
-      }, {
-        card: 'NO 1000114500001332540',
-        isCheck: false
-      }],
+      pupupList: [],
       //选择优惠券
       showList: false,
       chosenCoupon: -1,
@@ -195,7 +183,11 @@ export default {
       if (resData.status === 200 && resData.data.code === 1) {
         this.pupupList = resData.data.data || []
         if (this.pupupList.length > 0) {
-          this.card = this.pupupList[0].card
+          this.card = this.pupupList[0].cardNo
+          this.pupupList.forEach((item, index) => {
+            item.isCheck = index === 0
+          })
+          this.pupupList.shift()
         }
       }
     }
