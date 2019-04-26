@@ -130,7 +130,12 @@ export default {
     },
     submit () {
       this.resetPasswd()
-    }
+    },
+    destroyed () {
+      let self = this
+      window.setInterval(self.timeCell)
+      self.timeCell = null
+    },
   }
 }
 </script>
