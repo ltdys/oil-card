@@ -73,7 +73,16 @@ export default {
   methods: {
     jumpPath (item) { // 跳转子项页面
       let self = this;
-      self.$router.push(item.path)
+       if (item.path == '/my/yh_coupon') {
+        self.$router.push({
+        path: '/my/yh_coupon',
+        query: {
+          id: '1'
+        }
+      })
+      } else {
+        self.$router.push(item.path)
+      }
     },
   }
 }

@@ -6,6 +6,7 @@ const state = {
   currentOilType: 0, //当前选择的油卡充值类型
   currentDity: {}, //当前油卡详情数据
   currentOil: {}, //当前油卡
+  currentCoupon: {}, //当前优惠券
 }
 
 const actions = {
@@ -20,6 +21,9 @@ const actions = {
   },
   setCurrentOil ( { commit }, boo) {
     commit(types.SET_CURRENT_OIL, boo)
+  },
+  setCurrentCoupon ( { commit }, boo) {
+    commit(types.SET_CURRENT_COUPON, boo)
   },
 }
 
@@ -40,6 +44,9 @@ const getters = {
   getCurrentOil: state => {
     return state.currentOil
   },
+  getCurrentCoupon: state => {
+    return state.currentCoupon
+  },
 }
 
 const mutations = {
@@ -59,6 +66,10 @@ const mutations = {
   //当前油卡
   ['SET_CURRENT_OIL'] (state, boo) {
     state.currentOil = boo
+  },
+  //当前优惠券
+  ['SET_CURRENT_COUPON'] (state, boo) {
+    state.currentCoupon = boo
   },
 }
 

@@ -29,11 +29,12 @@
       </div>
     </div>
     <div>
-      <van-coupon-cell
+      <!-- <van-coupon-cell
         :coupons="coupons"
         :chosen-coupon="chosenCoupon"
-        @click="showList = true">
-      </van-coupon-cell>
+        @click="jumpYhCoupon">
+      </van-coupon-cell> -->
+      <van-cell title="优惠劵" is-link :value="currentCoupon.title || '使用优惠'" to="/my/yh_coupon?id=2" />
     </div>
     <div class="recharge_agreement">
       <div>提醒:代充值服务暂不提供发票</div>
@@ -143,6 +144,13 @@ export default {
       agreementText: '《服务协议》'
     };
   },
+  computed: {
+    currentCoupon: {
+      get: function () {
+        return this.$store.getters.getCurrentCoupon
+      }
+    }
+  },
   created() {
     this.payment = this.list[0].payment
     this.less = this.list[0].less
@@ -190,7 +198,16 @@ export default {
           this.pupupList.shift()
         }
       }
-    }
+    },
+    jumpYhCoupon () { // 跳转优惠劵页面
+      let self = this;
+      self.$router.push({
+        path: '/my/yh_coupon',
+        query: {
+          id: '2'
+        }
+      })
+    },
   }
 };
 </script>

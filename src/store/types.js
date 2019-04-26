@@ -13,3 +13,7 @@ export const GET_CURRENT_DITY = "GET_CURRENT_DITY"
 //当前油卡
 export const SET_CURRENT_OIL = "SET_CURRENT_OIL"
 export const GET_CURRENT_OIL = "GET_CURRENT_OIL"
+
+//当前优惠券
+export const SET_CURRENT_COUPON = "SET_CURRENT_COUPON"
+export const GET_CURRENT_COUPON = "GET_CURRENT_COUPON"

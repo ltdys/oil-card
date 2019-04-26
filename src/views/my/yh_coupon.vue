@@ -97,6 +97,14 @@ export default {
     changeTab (index, title) { //切换tab
       this.currentTab = index
     },
+    jumpDetail (val, item) { //点击优惠劵跳转
+      let self = this;
+      let query = self.$route.query.id
+      if (item.index == '0' && query == '2') {
+        self.$store.dispatch('setCurrentCoupon', val)
+        self.$router.back()
+      }
+    }
   }
 };
 </script>

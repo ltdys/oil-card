@@ -135,7 +135,7 @@ export default {
       self.$axios({
         method: 'post',
         headers: { 'content-type': 'application/x-www-form-urlencoded' },
-        url: '/FileUpload/uploadAppPic.do',
+        url: '/FileUpload/uploadAppPsn.do',
         data: form
       })
       .then(res => {
