@@ -7,7 +7,9 @@ let tokenArray = [
   '/UserMs/uRegister.do', 
   '/UserMs/sendValidByReg.do', 
   '/UserMs/uLogin.do', 
-  '/UserMs/sendValidByPhone.do'
+  '/UserMs/sendValidByPhone.do',
+  '/UserMs/isValidOKByUpPass.do',
+  '/UserMs/resetPasswd.do'
 ]
 
 axios.defaults.baseURL = ''
@@ -38,7 +40,7 @@ export default {
   //post请求
   post (url,param) {
     param.token = tokenArray.includes(url) ? 'jiangpeng' : getLocalStore('USER_INFO', 'json').token
-    if (url == '/UserMs/sendValidByReg.do' && (param.type == 4 || param.type == 5)) {
+    if (url == '/UserMs/sendValidByReg.do' && (param.type == 5)) {
       param.token = getLocalStore('USER_INFO', 'json').token
     }
     console.log("======", param.token)

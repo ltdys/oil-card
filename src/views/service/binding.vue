@@ -1,6 +1,6 @@
 <template>
   <com-page class="binding">
-    <com-header title="油卡绑定" is-back slot="header"></com-header>
+    <com-header :title="title" is-back slot="header"></com-header>
     
     <van-field
       v-model="formData.cardType"
@@ -15,6 +15,14 @@
       clearable
       label="卡号"
       placeholder="输入油卡背面的卡号">
+    </van-field>
+    <van-field
+      v-model="formData.cardNoAgain"
+      required
+      clearable
+      label="确认卡号"
+      :error-message="errorMsg.cardNoAgain"
+      placeholder="两次输入油卡卡号">
     </van-field>
     <van-field
       v-model="formData.idName"
@@ -46,9 +54,11 @@ import { Toast } from 'vant'
 export default {
   data() {
     return {
+      title: '油卡绑定',
       formData: {
         cardType: '中国石化',  //油卡类型
         cardNo: '',  //卡号
+        cardNoAgain: '',
         idName: '',  //持卡人
         mobile: ''  //手机号
       },
@@ -67,13 +77,32 @@ export default {
             }
           }
         ],
+        cardNoAgain: [
+          {
+            validator: (rule, value, callback) => {
+              if (value !== this.formData.cardNo) {
+                callback("两次卡号输入不一致")
+              } else {
+                callback()
+              }
+            }
+          }
+        ]
       },
       errorMsg: {
-        mobile: ''
+        mobile: '',
+        cardNoAgain: ''
       },
       isSubmit: true,
       validator: undefined,  //验证对象
     };
+  },
+
+  beforeRouteEnter (to, from, next) {
+    next(vm => {
+      // 通过 `vm` 访问组件实例,将值传入oldUrl
+      vm.title = from.fullPath === '/' ? '油卡绑定' : '添加油卡'
+    })
   },
 
   watch: {
@@ -140,7 +169,7 @@ export default {
       attrs.forEach(attr => {
         this.errorMsg[attr] = "";
       });
-		}
+    },
   }
 };
 </script>

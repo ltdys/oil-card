@@ -32,3 +32,9 @@ export const bindCardList = params => axios.post('/UserMs/bindCardList.do', para
 
 //油卡解绑
 export const unbindCard = params => axios.post('/UserMs/unbindCard.do', params)
+
+//忘记密码时,验证码是否有效
+export const isValidOKByUpPass = params => axios.post('/UserMs/isValidOKByUpPass.do', params)
+
+//忘记密码时,重置密码
+export const resetPasswd = params => axios.post('/UserMs/resetPasswd.do', params)

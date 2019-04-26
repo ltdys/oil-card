@@ -71,7 +71,6 @@ import md5 from 'js-md5'
 export default {
   data () {
     return {
-      codeText: '发送验证码',
       isBtnShow: true,
       codeText: '获取验证码',
       times: 60,

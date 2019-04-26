@@ -11,7 +11,7 @@
     </template>
     <template v-else>
       <div class="recharge_addcard">
-        <div class="recharge_addcard__btn" @click="$router.push('/service/recharge_addcard')">
+        <div class="recharge_addcard__btn" @click="$router.push('/service/binding')">
           <van-icon name="plus"></van-icon>
           <span>添加油卡</span>
         </div>
