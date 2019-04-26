@@ -35,7 +35,7 @@ export const list_mixins = {
         let userInfo = resData.data.data;
         self.$store.dispatch('setUserInfo', userInfo)
       } else {
-        Toast.fail({
+        Toast({
           message: resData.data.msg,
           duration: 1500
         })

@@ -124,7 +124,7 @@ export default {
           self.$router.back()
         })
       } else {
-        Toast.fail({
+        Toast({
           message: resData.data.msg,
           duration: 1500
         })

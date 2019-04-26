@@ -91,7 +91,7 @@ export default {
           }
         },1000)
 			} else {
-				Toast.fail(resData.data.msg)
+				Toast(resData.data.msg)
 			}
     },
     mobileChange () {
@@ -111,7 +111,7 @@ export default {
         Toast.success('验证通过')
         this.validCodeIsPass = true
       } else {
-        Toast.fail('验证码错误')
+        Toast('验证码错误')
         this.validCodeIsPass = false
       }
     },
@@ -125,7 +125,7 @@ export default {
         Toast.success(resData.data.msg)
         this.$router.push('/login')
       } else {
-        Toast.fail(resData.data.msg)
+        Toast(resData.data.msg)
       }
     },
     submit () {

@@ -136,7 +136,7 @@ export default {
       if (resData.status === 200 && resData.data.code === 1) {
         Toast.success('油卡绑定成功')
       } else {
-        Toast.fail(resData.data.msg)
+        Toast(resData.data.msg)
       }
     },
     validate(callback, data) {

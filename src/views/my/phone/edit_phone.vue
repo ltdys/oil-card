@@ -111,7 +111,7 @@ export default {
           }
         },1000)
       } else {
-        Toast.fail({
+        Toast({
           message: resData.data.msg,
           duration: 1500
         })
@@ -146,7 +146,7 @@ export default {
           self.$router.push('/login')
         })
       } else {
-        Toast.fail({
+        Toast({
           message: resData.data.msg,
           duration: 1500
         })

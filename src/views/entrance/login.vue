@@ -154,7 +154,7 @@ export default {
           }
         },1000)
 			} else {
-				Toast.fail(resData.data.msg)
+				Toast(resData.data.msg)
 			}
     },
     validate(callback, data) {
@@ -200,7 +200,7 @@ export default {
         this.$store.dispatch('setUserInfo', resData.data.data)
         this.$router.push('/')
       } else {
-        Toast.fail(resData.data.msg)
+        Toast(resData.data.msg)
       }
     },
     async sendValidByPhone () {  //手机发送验证码登录
@@ -210,7 +210,7 @@ export default {
         this.$store.dispatch('setUserInfo', resData.data.data)
         this.$router.push('/')
       } else {
-        Toast.fail(resData.data.msg)
+        Toast(resData.data.msg)
       }
     }
   },

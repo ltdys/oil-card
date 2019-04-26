@@ -165,7 +165,7 @@ export default {
         let list = resData.data.data;
         // self.oilcardList = list
       } else {
-        Toast.fail({
+        Toast({
           message: resData.data.msg,
           duration: 1500
         })

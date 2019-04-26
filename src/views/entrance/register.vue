@@ -121,7 +121,7 @@ export default {
           }
         },1000)
 			} else {
-				Toast.fail(resData.data.msg)
+				Toast(resData.data.msg)
 			}
     },
     mobileChange () {
@@ -168,7 +168,7 @@ export default {
         Toast.success('注册成功')
         this.$router.push('/login')
       } else {
-        Toast.fail(resData.data.msg)
+        Toast(resData.data.msg)
       }
     }
   },

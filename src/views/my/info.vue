@@ -63,7 +63,7 @@ export default {
         })
         self.getUserInfo()
       } else {
-        Toast.fail({
+        Toast({
           message: resData.data.msg,
           duration: 1500
         })
