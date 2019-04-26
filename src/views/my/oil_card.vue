@@ -45,7 +45,11 @@
 </template>
 
 <script>
+import { Toast } from 'vant';
+import { list_mixins } from "@/mixins";
+import { bindCardList } from '@/service/oilcard.js'
 export default {
+  mixins: [list_mixins],
   data() {
     return {
       swipeWid: 0, //轮播主图的宽度
@@ -147,8 +151,26 @@ export default {
     let pmWid = document.body.clientWidth;
     self.swipeWid = pmWid * 323 / 375
     self.swipeHei = self.swipeWid * 146 / 323
+    self.getBindCardList()
   },
   methods: {
+    async getBindCardList () { // 获取我的油卡列表
+      let self = this;
+      let param = {
+        mobile: self.userInfo.mobile
+      }
+      let resData = await bindCardList(param)
+      console.log('resData',resData)
+      if (resData.status === 200 && resData.data.code === 1) {
+        let list = resData.data.data;
+        // self.oilcardList = list
+      } else {
+        Toast.fail({
+          message: resData.data.msg,
+          duration: 1500
+        })
+      }
+    },
     changeTab (index, title) { //切换tab
       this.currentTab = index
     },
@@ -158,7 +180,7 @@ export default {
       this.$router.push('/my/oil_detail')
     },
     goClick () { // 新增页面
-      this.$router.push('/my/oil_add')
+      this.$router.push('/service/binding')
     },
     oilCardClick (item) { // 解除绑定
       let self = this;
