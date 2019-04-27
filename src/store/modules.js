@@ -42,6 +42,10 @@ const getters = {
     return state.currentDity
   },
   getCurrentOil: state => {
+    let status = getLocalStore('CURRENT_OIL', 'json')
+    if (status) {
+      state.currentOil = status
+    }
     return state.currentOil
   },
   getCurrentCoupon: state => {
@@ -66,6 +70,7 @@ const mutations = {
   //当前油卡
   ['SET_CURRENT_OIL'] (state, boo) {
     state.currentOil = boo
+    setLocalStore('CURRENT_OIL', boo)
   },
   //当前优惠券
   ['SET_CURRENT_COUPON'] (state, boo) {

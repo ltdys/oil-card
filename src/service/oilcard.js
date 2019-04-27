@@ -33,8 +33,23 @@ export const bindCardList = params => axios.post('/UserMs/bindCardList.do', para
 //油卡解绑
 export const unbindCard = params => axios.post('/UserMs/unbindCard.do', params)
 
+//油卡申请记录列表
+export const getCardApntList = params => axios.post('/UserMs/getCardApntList.do', params)
+
+//油卡申请详情
+export const getCardApntDetail = params => axios.post('/UserMs/getCardApntDetail.do', params)
+
+//油卡挂失
+export const lossCard = params => axios.post('/UserMs/lossCard.do', params)
+
 //忘记密码时,验证码是否有效
 export const isValidOKByUpPass = params => axios.post('/UserMs/isValidOKByUpPass.do', params)
 
 //忘记密码时,重置密码
 export const resetPasswd = params => axios.post('/UserMs/resetPasswd.do', params)
+
+// 充值金额获取
+export const getChargePrice = params => axios.post('/UserMs/getChargePrice.do', params)
+
+// 为油卡充值
+export const paycheck = params => axios.post('/UserMs/paycheck.do', params)

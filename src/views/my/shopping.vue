@@ -2,7 +2,7 @@
   <com-page class="my">
     <com-header title="商城" is-back slot="header"></com-header>
     <div class="no-data-sty">
-      商城升级中
+      维护中
     </div>
   </com-page>
 </template>

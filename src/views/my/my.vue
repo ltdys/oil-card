@@ -51,15 +51,15 @@ export default {
           text: '我的订单',
           path: '/my/my_order'
         }, {
-          img: 'static/images/icon/collect.png',
+          img: 'static/images/icon/coupon.png',
           text: '我的优惠劵',
           path: '/my/yh_coupon'
         }, {
-          img: 'static/images/icon/coupon.png',
+          img: 'static/images/icon/setting.png',
           text: '设置',
           path: '/my/my_setting'
         }, {
-          img: 'static/images/icon/integral.png',
+          img: 'static/images/icon/collect.png',
           text: '客服',
           path: '/my/service'
         }, {

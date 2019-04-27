@@ -197,7 +197,11 @@ export default {
       let resData = await uLogin(this.formData)
       if (resData.status === 200 && resData.data.code === 1) {
         Toast.success('登录成功')
-        this.$store.dispatch('setUserInfo', resData.data.data)
+        let userInfo = resData.data.data
+        userInfo.headImage = userInfo.headImage ? (this.HEAD_IMAGE_PR + userInfo.headImage) : 'static/images/icon/user_defu.png'
+        userInfo.idCardImage = userInfo.idCardImage ? (this.HEAD_IMAGE_PR + userInfo.idCardImage) : ''
+        userInfo.idCardBackImage = userInfo.idCardBackImage ? (this.HEAD_IMAGE_PR + userInfo.idCardBackImage) : ''
+        this.$store.dispatch('setUserInfo', userInfo)
         this.$router.push('/')
       } else {
         Toast(resData.data.msg)

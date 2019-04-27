@@ -1,7 +1,7 @@
 <template>
   <com-page class="my_oil">
     <com-header title="我的油卡" is-back is-go icon-name="plus" v-on:goClick="goClick" slot="header"></com-header>
-    <van-swipe :width="swipeWid" :height="swipeHei" :loop="false" :show-indicators="false">
+    <van-swipe :width="swipeWid" :height="swipeHei" :loop="false" :show-indicators="false" @change="changeSwipe">
       <van-swipe-item v-for="(item, index) in oilcardList" :key="index">
         <div class="oil_box">
           <img class="my_oil_img" v-lazy="item.img"/>
@@ -11,7 +11,7 @@
           </div>
           <div class="oil_box_bm">{{ item.code | vUpperCase }}</div>
           <div class="oil_box_zt">
-            <img v-if="item.status == 2" src="static/images/icon/encrypt.png" alt="">
+            <img v-if="item.status == 2" src="static/images/icon/encrypt.png" alt="" @click="oilCardClick(item)">
             <img v-else-if="item.status == 3" src="static/images/icon/lose.png" alt="" @click="oilCardClick(item)">
           </div>
         </div>
@@ -52,64 +52,25 @@
 <script>
 import { Toast } from 'vant';
 import { list_mixins } from "@/mixins";
-import { bindCardList } from '@/service/oilcard.js'
+import { bindCardList, getCardApntList } from '@/service/oilcard.js'
 export default {
   mixins: [list_mixins],
   data() {
     return {
       swipeWid: 0, //轮播主图的宽度
       swipeHei: 0, //轮播主图的高度
-      oilcardList: [],
+      oilcardList: [], //油卡列表
+      currentCard: {}, //当前油卡
       currentTab: 0, //当前tab
       tabList: [
         {
           index: 0,
           title: '充值记录',
-          list: [
-            // {
-            //   title: '充值成功',
-            //   id: '45656564892143',
-            //   name: '加油卡充值',
-            //   sum: '100',
-            //   orderId: '21554860',
-            //   time: '2018.04.01 12:00',
-            //   type: '支付宝',
-            //   state: '付款成功'
-            // }, {
-            //   title: '充值失败',
-            //   id: '45656564892143',
-            //   name: '加油卡充值',
-            //   sum: '100',
-            //   orderId: '21554860',
-            //   time: '2018.04.01 12:00',
-            //   type: '微信',
-            //   state: '付款失败'
-            // }, 
-          ]
+          list: []
         }, {
           index: 1,
           title: '消费记录',
-          list: [
-            // {
-            //   title: '油卡充值消费',
-            //   id: '45656564892143',
-            //   name: '加油卡消费',
-            //   sum: '100',
-            //   orderId: '21554860',
-            //   time: '2018.04.01 12:00',
-            //   type: '微信',
-            //   state: '付款成功'
-            // }, {
-            //   title: '油卡充值消费',
-            //   id: '45656564892143',
-            //   name: '加油卡消费',
-            //   sum: '100',
-            //   orderId: '21554860',
-            //   time: '2018.04.01 12:00',
-            //   type: '支付宝',
-            //   state: '付款失败'
-            // }, 
-          ]
+          list: []
         }
       ]
     };
@@ -128,7 +89,7 @@ export default {
         mobile: self.userInfo.mobile
       }
       let resData = await bindCardList(param)
-      console.log('resData',resData)
+      console.log('获取我的油卡列表',resData)
       if (resData.status === 200 && resData.data.code === 1) {
         let list = resData.data.data;
         if (list.length == 0) {
@@ -149,6 +110,10 @@ export default {
             }
             self.oilcardList.push(obj)
           })
+          self.$nextTick(() => {
+            self.currentCard = self.oilcardList[0]
+            self.cardApntList()
+          })
         }
       } else {
         Toast({
@@ -168,13 +133,36 @@ export default {
     goClick () { // 新增页面
       this.$router.push('/service/binding')
     },
-    oilCardClick (item) { // 解除绑定
+    oilCardClick (item) { // 油卡挂失
       let self = this;
-      if (item.status == 1) {
-        this.$store.dispatch("setCurrentOil", item)
+      if (item.status == 2) { //正常（进入解绑）
+        self.$store.dispatch("setCurrentOil", item)
+        console.log(item)
         self.$router.push('/my/oil_delete')
       }
-    }
+    },
+    changeSwipe (index) { //切换油卡
+      let self = this;
+      self.currentCard = self.oilcardList[index]
+    },
+    async cardApntList () { // 当前油卡充值记录
+      let self = this;
+      let param = {
+        id: self.currentCard.id,
+        mobile: self.userInfo.mobile
+      }
+      let resData = await getCardApntList(param)
+      console.log('当前油卡充值记录',resData)
+      if (resData.status === 200 && resData.data.code === 1) {
+        let list = resData.data.data
+        self.tabList[0].list = list
+      } else {
+        Toast({
+          message: resData.data.msg,
+          duration: 1500
+        })
+      }
+    },
   }
 };
 </script>

@@ -11,6 +11,7 @@ export const list_mixins = {
       finished:false,
       rules: rules,
       errorMsg: errorMsg,
+      isLoading: true,
     }
   },
 
@@ -33,6 +34,12 @@ export const list_mixins = {
       console.log('resData',resData)
       if (resData.status === 200 && resData.data.code === 1) {
         let userInfo = resData.data.data;
+        userInfo.headImage = userInfo.headImage ? (self.HEAD_IMAGE_PR + userInfo.headImage) : 'static/images/icon/user_defu.png'
+        userInfo.idCardImage = userInfo.idCardImage ? (self.HEAD_IMAGE_PR + userInfo.idCardImage) : ''
+        userInfo.idCardBackImage = userInfo.idCardBackImage ? (self.HEAD_IMAGE_PR + userInfo.idCardBackImage) : ''
+
+        console.log(self.perfixImg)
+        console.log(userInfo.headImage)
         self.$store.dispatch('setUserInfo', userInfo)
       } else {
         Toast({

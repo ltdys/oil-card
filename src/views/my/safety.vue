@@ -24,7 +24,7 @@
           <van-icon class="zjzp-cell_icon" size="38px" name="plus" />
           <div class="zjzp-cell_text">身份证正面照片</div>
         </div>
-        <img class="zjzp-cell_img" v-else :src="safetyInfo.IDfront" alt="">
+        <img class="zjzp-cell_img" v-else :src="safetyInfo.IDfront | vAddPerfix" alt="">
       </van-uploader>
       <van-uploader :after-read="versoImg" accept="image/gif, image/jpeg, image/png">
         <div @click="updataImg('2')" class="zjzp-cell_box" v-if="safetyInfo.IDverso == ''">
@@ -32,7 +32,7 @@
           <van-icon class="zjzp-cell_icon" size="38px" name="plus" />
           <div class="zjzp-cell_text">身份证反面照片</div>
         </div>
-        <img class="zjzp-cell_img" v-else :src="safetyInfo.IDverso" alt="">
+        <img class="zjzp-cell_img" v-else :src="safetyInfo.IDverso | vAddPerfix" alt="">
       </van-uploader>
     </van-cell>
     <div class="mysafety_toast">
@@ -50,6 +50,7 @@ import { list_mixins } from "@/mixins";
 import validator from "@/utils/validator.js"
 import { verifyObj, paramsValidate } from "@/utils/typeUtil";
 import { uploadAppPic, uUpdateUserInfo } from '@/service/oilcard.js'
+import { imgChangeForm } from '@/utils/oilUtil.js'
 export default {
   mixins: [list_mixins],
   data() {
@@ -84,16 +85,55 @@ export default {
     this.safetyInfo.IDverso = this.userInfo.idCardBackImage || ''
     this.validator = validator(this.rules, this.safetyInfo)
   },
+  updated () {
+    Toast.clear();
+  },
   methods: {
-    frontImg (key) { //证件照片（正面）点击事件
-      let form = new FormData();
-      form.append("file", key.file);
-      this.upLoadImg(form, '1')
+    frontImg (file) { //证件照片（正面）点击事件
+      // let form = new FormData();
+      // form.append("file", key.file);
+      // this.upLoadImg(form, '1')
+      let self = this;
+      if(/\/(?:jpeg|png)/i.test(file.file.type) && file.file.size > 102400) {
+        let canvas =  document.createElement('canvas')  
+        let context = canvas.getContext('2d') 
+        let img = new Image()
+        img.src = file.content
+        img.onload = () => {
+          canvas.width = 300
+          canvas.height = 300
+          context.drawImage(img, 0, 0, 300, 300)
+          file.content = canvas.toDataURL(file.file.type, 0.92) 
+          let form = imgChangeForm(file.content)
+          self.upLoadImg(form, '1')
+        }                       
+      }else{
+        let form = imgChangeForm(file.content)
+        self.upLoadImg(form, '1')
+      }
     },
-    versoImg (key) { //证件照片（反面）点击事件
-      let form = new FormData();
-      form.append("file", key.file);
-      this.upLoadImg(form, '2')
+    versoImg (file) { //证件照片（反面）点击事件
+      // let form = new FormData();
+      // form.append("file", key.file);
+      // this.upLoadImg(form, '2')
+      let self = this;
+      if(/\/(?:jpeg|png)/i.test(file.file.type) && file.file.size > 102400) {
+        let canvas =  document.createElement('canvas')  
+        let context = canvas.getContext('2d') 
+        let img = new Image()
+        img.src = file.content
+        img.onload = () => {
+          canvas.width = 300
+          canvas.height = 300
+          context.drawImage(img, 0, 0, 300, 300)
+          file.content = canvas.toDataURL(file.file.type, 0.92) 
+          let form = imgChangeForm(file.content)
+          self.upLoadImg(form, '2')
+        }                       
+      }else{
+        let form = imgChangeForm(file.content)
+        self.upLoadImg(form, '2')
+      }
     },
     confireBtn () { //确认提交按钮事件
       let self = this;
@@ -115,8 +155,8 @@ export default {
       let resData = await uUpdateUserInfo(param)
       console.log('resData',resData)
       if (resData.status === 200 && resData.data.code === 1) {
-        Toast.success({
-          message: resData.data.msg,
+        Toast({
+          message: '实名认证成功！',
           duration: 1500
         })
         self.getUserInfo()
@@ -125,13 +165,18 @@ export default {
         })
       } else {
         Toast({
-          message: resData.data.msg,
+          message: '实名认证失败！',
           duration: 1500
         })
       }
     },
     upLoadImg (form, key) { //上传身份证照联调
       let self = this;
+       Toast.loading({
+        mask: true,
+        message: '上传中...',
+        duration: 1000000
+      });
       self.$axios({
         method: 'post',
         headers: { 'content-type': 'application/x-www-form-urlencoded' },
@@ -140,7 +185,8 @@ export default {
       })
       .then(res => {
         console.log('图片上传成功返回',res)
-        let safetyImage = self.HEAD_IMAGE_PR + res.data
+        // let safetyImage = self.HEAD_IMAGE_PR + res.data
+        let safetyImage = res.data
         if (key === '1') {
           self.safetyInfo.IDfront = safetyImage
         } else if (key === '2') {

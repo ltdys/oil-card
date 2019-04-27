@@ -51,7 +51,7 @@
         <span>&nbsp;￥{{payment}}&nbsp;</span>
         <span>(省{{less}}元)</span>
       </div>
-      <div class="recharge_action__submit" :class="[!checked ? 'opacity-disabled' : '']">
+      <div class="recharge_action__submit" :class="[!checked ? 'opacity-disabled' : '']" @click="oilPaycheck">
         立即充值
       </div>
     </div>
@@ -101,8 +101,9 @@ const coupon = {
   valueDesc: '1.5',
   unitDesc: '元'
 }
-import { bindCardList } from '@/service/oilcard.js'
+import { bindCardList, getChargePrice, paycheck } from '@/service/oilcard.js'
 import { list_mixins } from '@/mixins'
+import bigDecimal from 'js-big-decimal'
 export default {
   mixins: [list_mixins],
 
@@ -114,25 +115,7 @@ export default {
       checked: false,
       popupShow: false,
       radio: '1',
-      list:[{
-        title: '100元',
-        desc: '支付99元',
-        isCheck: true,
-        payment: '99',
-        less: '1'
-      }, {
-        title: '200元',
-        desc: '支付198元',
-        isCheck: false,
-        payment: '198',
-        less: '2'
-      }, {
-        title: '500元',
-        desc: '支付496元',
-        isCheck: false,
-        payment: '500',
-        less: '4'
-      }],
+      list:[],
       payment: '',
       less: '',
       pupupList: [],
@@ -152,11 +135,43 @@ export default {
     }
   },
   created() {
-    this.payment = this.list[0].payment
-    this.less = this.list[0].less
+    // this.payment = this.list[0].payment
+    // this.less = this.list[0].less
     this.bindCardList()
+    this.chargePrice()
+    console.log(bigDecimal.add('12', '45'));
   },
   methods: {
+    async chargePrice () { //获取充值金额
+      let param = {
+        mobile: this.userInfo.mobile
+      }
+      let resData = await getChargePrice(param)
+      console.log('获取充值金额',resData)
+      if (resData.status === 200 && resData.data.code === 1) {
+        let list = resData.data.data
+        list.forEach((item, index) => {
+          let obj = {
+            title: item.price + '元',
+            desc: '支付' + item.spePrice + '元',
+            isCheck: false,
+            payment: item.spePrice,
+            less: item.price - item.spePrice
+          }
+          if (index == 0) {
+            obj.isCheck = true
+            this.payment = obj.payment
+            this.less = obj.less
+          }
+          this.list.push(obj)
+        })
+      } else {
+        Toast({
+          message: resData.data.msg,
+          duration: 1500
+        })
+      }
+    },
     clickPanel (item) {
       this.payment = item.payment
       this.less = item.less
@@ -181,6 +196,7 @@ export default {
     radioChange (name) {
       this.popupShow = false
       this.iconName = 'arrow-down'
+      console.log(this.pupupList)
       this.card = name
     },
     async bindCardList () {
@@ -192,12 +208,40 @@ export default {
         this.pupupList = resData.data.data || []
         if (this.pupupList.length > 0) {
           this.card = this.pupupList[0].cardNo
+          this.radio = this.pupupList[0].cardNo
           this.pupupList.forEach((item, index) => {
             item.isCheck = index === 0
           })
-          this.pupupList.shift()
+          // this.pupupList.shift()
         }
+      } else {
+        Toast({
+          message: resData.data.msg,
+          duration: 1500
+        })
       }
+    },
+    async oilPaycheck () { // 油卡充值
+      // let money = (Number(this.payment) + Number(this.less)).toFixed(2)
+      // let money = bigDecimal.add(this.payment, this.less);
+      // money = bigDecimal.round(money, 2)
+      // let param = {
+      //   mobile: this.userInfo.mobile,
+      //   cardNo: this.card,
+      //   quota: money,
+      //   coupId: this.currentCoupon.id || '1', //当前优惠劵id，暂未优惠劵
+      //   coupBalance: 0
+      // }
+      // let resData = await paycheck(param)
+      // console.log('油卡充值', resData)
+      // if (resData.status === 200 && resData.data.code === 1) {
+        
+      // } else {
+      //   Toast({
+      //     message: resData.data.msg,
+      //     duration: 1500
+      //   })
+      // }
     },
     jumpYhCoupon () { // 跳转优惠劵页面
       let self = this;

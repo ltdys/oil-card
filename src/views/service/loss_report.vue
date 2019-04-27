@@ -16,7 +16,10 @@
 </template>
 
 <script>
+import { list_mixins } from "@/mixins";
+import { lossCard } from '@/service/oilcard.js'
 export default {
+  mixins: [list_mixins],
   data() {
     return {
       card: '',  //挂失油卡卡号
@@ -36,8 +39,25 @@ export default {
     
   },
   methods: {
-    submit () {
-
+    async submit () { //油卡挂失接口
+      let self = this;
+      let param = {
+        mobile: self.userInfo.mobile,
+        cardNo: self.card
+      }
+      let resData = await lossCard(param)
+      console.log('resData',resData)
+      if (resData.status === 200 && resData.data.code === 1) {
+        Toast.success({
+          message: resData.data.msg,
+          duration: 1500
+        })
+      } else {
+        Toast({
+          message: resData.data.msg,
+          duration: 1500
+        })
+      }
     }
   }
 };

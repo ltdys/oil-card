@@ -1,3 +1,4 @@
+import Vue from 'vue'
 const vFilter = {
   getDay: value => {
     return parseInt(Math.floor(value/3600) / 24)
@@ -33,6 +34,11 @@ const vFilter = {
   vMoneyChange: value => {//金额转化
     if (!value) { value = 0 }
     return "￥" + value
+  },
+  vAddPerfix: value => { //图片路径转化
+    if (!value) { value = '' }
+    let perfix = Vue.prototype.HEAD_IMAGE_PR
+    return value.indexOf(perfix) != -1 ? value : perfix + value
   },
 }
 
