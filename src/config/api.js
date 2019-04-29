@@ -12,8 +12,8 @@ let tokenArray = [
   '/UserMs/resetPasswd.do'
 ]
 
-axios.defaults.baseURL = ''
-// axios.defaults.baseURL = process.env.BASE_API
+// axios.defaults.baseURL = ''
+axios.defaults.baseURL = process.env.BASE_API
 
 
 //设置默认请求头
