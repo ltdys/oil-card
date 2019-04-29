@@ -53,3 +53,6 @@ export const getChargePrice = params => axios.post('/UserMs/getChargePrice.do', 
 
 // 为油卡充值
 export const paycheck = params => axios.post('/UserMs/paycheck.do', params)
+
+// 首页轮播图
+export const getHeadPicList = params => axios.post('/UserMs/getHeadPicList.do', params)
