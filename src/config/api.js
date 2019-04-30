@@ -1,4 +1,7 @@
 import axios from 'axios'
+import Vue from 'vue'
+import router from '../router'
+import { Toast } from 'vant';
 import { getLocalStore } from '@/utils/storageUtil'
 
 let cancel ,promiseArr = {}
@@ -53,7 +56,17 @@ export default {
           cancel = c
         })
       }).then(res => {
-        resolve(res)
+        if (res.data.code == 0 && res.data.data == 'kick_out') {
+          Toast({
+            message: res.data.msg,
+            duration: 1500
+          })
+          router.push('/login')
+          console.log(router)
+        } else {
+          resolve(res)
+        }
+        console.log('res==',res)
       }).catch(error => {
         reject(error)
       })

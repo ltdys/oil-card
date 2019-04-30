@@ -101,6 +101,7 @@ const coupon = {
   valueDesc: '1.5',
   unitDesc: '元'
 }
+import { Toast } from 'vant';
 import { bindCardList, getChargePrice, paycheck } from '@/service/oilcard.js'
 import { list_mixins } from '@/mixins'
 import bigDecimal from 'js-big-decimal'
