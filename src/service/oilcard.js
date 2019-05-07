@@ -56,3 +56,6 @@ export const paycheck = params => axios.post('/UserMs/paycheck.do', params)
 
 // 首页轮播图
 export const getHeadPicList = params => axios.post('/UserMs/getHeadPicList.do', params)
+
+//油卡申请(预约)
+export const cardAppointment = params => axios.post('/UserMs/cardAppointment.do', params)

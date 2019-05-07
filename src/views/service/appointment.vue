@@ -60,6 +60,7 @@
 <script>
 import { checkStr, paramsValidate } from '@/utils/typeUtil'
 import validator from "@/utils/validator.js"
+import { cardAppointment } from '@/service/oilcard.js'
 export default {
   data() {
     return {
@@ -156,7 +157,10 @@ export default {
       attrs.forEach(attr => {
         this.errorMsg[attr] = "";
       });
-		}
+    },
+    async cardAppointment () {
+      let resData = await cardAppointment()
+    }
   }
 };
 </script>

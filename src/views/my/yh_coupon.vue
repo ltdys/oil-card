@@ -20,6 +20,9 @@
             <div class="oil_cons_right_title">{{ val.title }}</div>
             <div class="oil_cons_right_time">{{ val.time }}</div>
           </div>
+          <van-radio-group v-model="radio" @change="radioChange" v-show="id == 2">
+            <van-radio :name="val.id" />
+          </van-radio-group>
           <!-- <div class="oil_cons_right">
             <div class="oil_cons_right_sum" :class="[currentTab == 0 ? 'color_red' : 'color_blue']">
               <span v-show="currentTab == 1">-</span>{{ val.sum | vMoneyChange }}
@@ -37,12 +40,15 @@ export default {
   data() {
     return {
       currentTab: 0, //当前tab
+      radio: '0',
+      id: '1',
       tabList: [
         {
           index: 0,
           title: '未使用',
           list: [
             {
+              id: '1',
               price: '60',
               name: '满499可用',
               title: '60元加油优惠劵',
@@ -59,11 +65,13 @@ export default {
           title: '已使用',
           list: [
             {
+              id: '2',
               price: '60',
               name: '满499可用',
               title: '60元加油优惠劵',
               time: '2018.04.01-2019.01.01',
             }, {
+              id: '3',
               price: '10',
               name: '满499可用',
               title: '10元加油优惠劵',
@@ -75,11 +83,13 @@ export default {
           title: '已过期',
           list: [
             {
+              id: '4',
               price: '60',
               name: '满499可用',
               title: '60元加油优惠劵',
               time: '2018.04.01-2019.01.01',
             }, {
+              id: '5',
               price: '10',
               name: '满499可用',
               title: '10元加油优惠劵',
@@ -91,7 +101,7 @@ export default {
     };
   },
   created() {
-    
+    this.id = this.$route.query.id
   },
   methods: {
     changeTab (index, title) { //切换tab
@@ -104,6 +114,9 @@ export default {
         self.$store.dispatch('setCurrentCoupon', val)
         self.$router.back()
       }
+    },
+    radioChange () {
+      this.$router.push('/service/recharge')
     }
   }
 };
@@ -148,6 +161,7 @@ export default {
       justify-content: center;
       flex-direction: column;
       margin-left: 20px;
+      margin-right: 10px;
       &_title{
         font-size: 17px;
         font-weight:600;
