@@ -23,10 +23,7 @@
 
     data () {
       return {
-        images: [
-          'static/images/banner.jpg',
-          'static/images/banner1.jpg'
-        ]
+        images: []
       }
     },
 

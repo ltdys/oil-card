@@ -9,15 +9,6 @@
       label="油卡类型">
     </van-field>
     <van-field
-      v-model="formData.express"
-      required
-      clearable
-      disabled
-      label="选择快递"
-      right-icon="arrow"
-      @click-right-icon="expressChange">
-    </van-field>
-    <van-field
       v-model="formData.addressee"
       required
       clearable
@@ -43,16 +34,6 @@
     <div class="submit_buttons">
       <van-button type="primary" :disabled="isSubmit" @click="submit">立即申请</van-button>
     </div>
-    
-    <van-popup position="bottom" v-model="show">
-      <van-picker
-        :default-index="0"
-        show-toolbar
-        :columns="columns"
-        @cancel="onCancel"
-        @confirm="onConfirm"
-      />
-    </van-popup>
 
   </com-page>
 </template>
@@ -67,7 +48,6 @@ export default {
       validator: undefined,  //验证对象
       formData: {
         cardType: '中国石化',  //油卡类型
-        express: '顺丰', //快递
         addressee: '',  //收件人
         phone: '',  //手机号
         address: '',  //收货地址
@@ -93,7 +73,6 @@ export default {
       },
       show: false,
       isSubmit: true,
-      columns: ['顺丰', '中通', '申通', '韵达', '圆通', 'EMS']
     };
   },
 
@@ -110,11 +89,7 @@ export default {
     this.validator = validator(this.rules, this.formData)
   },
   methods: {
-    expressChange () {
-      this.show = true
-    },
     onConfirm(value, index) {
-      this.formData.express = value
       this.show = false
     },
     onCancel () {
