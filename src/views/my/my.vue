@@ -3,8 +3,8 @@
     <com-header title="我的" slot="header"></com-header>
     <div class="my_header">
       <img class="my_header__img" :src="userInfo.headImage | vUserImg" onerror="onerror=null;this.src='static/images/icon/user_defu.png'" alt="">
-      <span class="my_header__text">微信昵称：</span>
-      <span class="my_header__name">{{ userInfo.nickName }}</span>
+      <span class="my_header__text">姓名：</span>
+      <span class="my_header__name">{{ userInfo.nickName || 'HQ石化'}}</span>
     </div>
     <div class="blank-10"></div>
     <div class="my_user">个人服务</div>
@@ -56,7 +56,7 @@ export default {
           path: '/my/yh_coupon'
         }, {
           img: 'static/images/icon/setting.png',
-          text: '设置',
+          text: '系统设置',
           path: '/my/my_setting'
         }, {
           img: 'static/images/icon/collect.png',

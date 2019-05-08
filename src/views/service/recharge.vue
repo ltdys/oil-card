@@ -223,26 +223,26 @@ export default {
       }
     },
     async oilPaycheck () { // 油卡充值
-      // let money = (Number(this.payment) + Number(this.less)).toFixed(2)
-      // let money = bigDecimal.add(this.payment, this.less);
-      // money = bigDecimal.round(money, 2)
-      // let param = {
-      //   mobile: this.userInfo.mobile,
-      //   cardNo: this.card,
-      //   quota: money,
-      //   coupId: this.currentCoupon.id || '1', //当前优惠劵id，暂未优惠劵
-      //   coupBalance: 0
-      // }
-      // let resData = await paycheck(param)
-      // console.log('油卡充值', resData)
-      // if (resData.status === 200 && resData.data.code === 1) {
-        
-      // } else {
-      //   Toast({
-      //     message: resData.data.msg,
-      //     duration: 1500
-      //   })
-      // }
+      let quota = 0  //充值金额
+      let realPay = 0  //实付金额
+      let param = {
+        mobile: this.userInfo.mobile,
+        cardNo: this.card,
+        quota: this.payment + this.less,
+        realPay: this.payment,
+        coupId: this.currentCoupon.id || '1', //当前优惠劵id，暂未优惠劵
+        coupBalance: 0
+      }
+      let resData = await paycheck(param)
+      console.log('油卡充值', resData)
+      if (resData.status === 200 && resData.data.code === 1) {
+        Toast.success(resData.data.msg)
+      } else {
+        Toast({
+          message: resData.data.msg,
+          duration: 1500
+        })
+      }
     },
     jumpYhCoupon () { // 跳转优惠劵页面
       let self = this;

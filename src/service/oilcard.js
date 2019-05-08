@@ -59,3 +59,6 @@ export const getHeadPicList = params => axios.post('/UserMs/getHeadPicList.do', 
 
 //油卡申请(预约)
 export const cardAppointment = params => axios.post('/UserMs/cardAppointment.do', params)
+
+//油卡退卡
+export const cardReject = params => axios.post('/UserMs/cardReject.do', params)

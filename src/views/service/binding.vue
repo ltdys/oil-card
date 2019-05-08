@@ -32,11 +32,20 @@
       placeholder="输入持卡人姓名">
     </van-field>
     <van-field
+      v-model="formData.apntMobile"
+      type="tel"
+      required
+      clearable
+      label="预约人手机号"
+      :error-message="errorMsg.apntMobile"
+      placeholder="输入预约人手机号">
+    </van-field>
+    <van-field
       v-model="formData.mobile"
       type="tel"
       required
       clearable
-      label="手机号"
+      label="持卡人手机号"
       :error-message="errorMsg.mobile"
       placeholder="输入持卡人手机号">
     </van-field>
@@ -60,11 +69,25 @@ export default {
         cardNo: '',  //卡号
         cardNoAgain: '',
         idName: '',  //持卡人
-        mobile: ''  //手机号
+        mobile: '',  //持卡人手机号
+        apntMobile: ''  //预约人手机号
       },
       //校验
       rules: {
         mobile: [
+          {
+            validator: (rule, value, callback) => {
+              if (!value) {
+                callback("请输入手机号码");
+              } else if (checkStr(value, 'phone')) {
+                callback();
+              } else {
+                callback("请输入正确的手机号码");
+              }
+            }
+          }
+        ],
+        apntMobile: [
           {
             validator: (rule, value, callback) => {
               if (!value) {
@@ -91,6 +114,7 @@ export default {
       },
       errorMsg: {
         mobile: '',
+        apntMobile: '',
         cardNoAgain: ''
       },
       isSubmit: true,
@@ -115,6 +139,8 @@ export default {
   },
   
   created() {
+    this.formData.idName = this.$store.getters.getUserInfo.idName
+    this.formData.mobile = this.$store.getters.getUserInfo.mobile
     this.validator = validator(this.rules, this.formData)
   },
   methods: {
@@ -130,11 +156,12 @@ export default {
         mobile: this.formData.mobile,
         cardNo: this.formData.cardNo,
         idName: this.formData.idName,
+        apntMobile: this.formData.apntMobile,
         cardType: this.CARDTYPE
       }
       let resData = await bindCard(param)
       if (resData.status === 200 && resData.data.code === 1) {
-        Toast.success('油卡绑定成功')
+        Toast.success(resData.data.msg)
         this.$router.back()
       } else {
         Toast(resData.data.msg)
