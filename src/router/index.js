@@ -145,6 +145,14 @@ export const routes = [{
     }
   },
   {
+    path: '/my/sys_setting',
+    component: () => import('@/views/my/sys_setting.vue'),
+    meta: {
+      index: 21,
+      require: true
+    }
+  },
+  {
     path: '/service/appointment', //预约办卡
     component: () => import('@/views/service/appointment.vue'),
     meta: {

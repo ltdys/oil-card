@@ -57,7 +57,7 @@ export default {
         }, {
           img: 'static/images/icon/setting.png',
           text: '系统设置',
-          path: '/my/my_setting'
+          path: '/my/sys_setting'
         }, {
           img: 'static/images/icon/collect.png',
           text: '客服',

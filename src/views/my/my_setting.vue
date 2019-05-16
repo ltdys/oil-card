@@ -1,6 +1,6 @@
 <template>
   <com-page class="mysetting">
-    <com-header title="设置" is-back slot="header"></com-header>
+    <com-header title="修改密码" is-back slot="header"></com-header>
     <van-field label="旧密码" v-model="editPsd.oldpsd" clearable placeholder="输入旧密码"></van-field>
     <van-field label="新密码" v-model="editPsd.psd" clearable placeholder="输入新密码"></van-field>
     <van-field label="确认新密码" v-model="editPsd.confpsd" clearable placeholder="输入确认新密码"></van-field>

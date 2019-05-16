@@ -62,3 +62,6 @@ export const cardAppointment = params => axios.post('/UserMs/cardAppointment.do'
 
 //油卡退卡
 export const cardReject = params => axios.post('/UserMs/cardReject.do', params)
+
+//退出登录
+export const uLogout = params => axios.post('/UserMs/uLogout.do', params)

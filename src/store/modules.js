@@ -25,6 +25,9 @@ const actions = {
   setCurrentCoupon ( { commit }, boo) {
     commit(types.SET_CURRENT_COUPON, boo)
   },
+  setClearAll ({ commit }, boo){
+		commit(types.SET_CLEAR_ALL, boo)
+  },
 }
 
 const getters = {
@@ -76,6 +79,13 @@ const mutations = {
   ['SET_CURRENT_COUPON'] (state, boo) {
     state.currentCoupon = boo
   },
+  ['SET_CLEAR_ALL'] (state, boo) {
+    state.userInfo = {}
+    state.currentOilType = 0
+    state.currentDity = {}
+    state.currentOil = {}
+    state.currentCoupon = {}
+  }
 }
 
 export default {

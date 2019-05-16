@@ -17,3 +17,7 @@ export const GET_CURRENT_OIL = "GET_CURRENT_OIL"
 //当前优惠券
 export const SET_CURRENT_COUPON = "SET_CURRENT_COUPON"
 export const GET_CURRENT_COUPON = "GET_CURRENT_COUPON"
+
+//清空数据
+export const SET_CLEAR_ALL = 'SET_CLEAR_ALL'
+export const GET_CLEAR_ALL = 'GET_CLEAR_ALL'
