@@ -258,7 +258,7 @@ export default {
       }
     }
     &_bottom {
-      margin-top: 150px;
+      margin-top: 60px;
       text-align: center;
       color: #a0a0a0;
       font-size: 15px;
