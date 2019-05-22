@@ -35,8 +35,7 @@
       async getHeadPicList () {
         let params = {
           page: 1,
-          rows: 10,
-          mobile: this.$store.getters.getUserInfo.mobile
+          rows: 10
         }
         let resData = await getHeadPicList(params)
         if (resData.status === 200 && resData.data.code === 1) {
