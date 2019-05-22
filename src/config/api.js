@@ -12,7 +12,8 @@ let tokenArray = [
   '/UserMs/uLogin.do', 
   '/UserMs/sendValidByPhone.do',
   '/UserMs/isValidOKByUpPass.do',
-  '/UserMs/resetPasswd.do'
+  '/UserMs/resetPasswd.do',
+  '/UserMs/getHeadPicList.do'
 ]
 
 axios.defaults.baseURL = ''
