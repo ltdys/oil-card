@@ -161,6 +161,14 @@ export const routes = [{
     }
   },
   {
+    path: '/service/appointment-query', //预约办卡
+    component: () => import('@/views/service/appointment-query.vue'),
+    meta: {
+      index: 11,
+      requireAuth: true
+    }
+  },
+  {
     path: '/service/binding', //油卡绑定
     component: () => import('@/views/service/binding.vue'),
     meta: {

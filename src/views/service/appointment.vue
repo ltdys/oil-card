@@ -45,9 +45,15 @@
         <span>同意预约协议</span>
       </van-checkbox>
     </div>
-    <div class="submit_buttons">
-      <van-button type="primary" :disabled="isSubmit" @click="submit">立即申请</van-button>
+    <div class="submit_buttons1">
+      <van-button type="primary" :disabled="isSubmit" @click="submit" class="submit_buttons1__apply">立即申请</van-button>
+      <van-button type="primary" @click="querySubmit" class="submit_buttons1__query">申请查询</van-button>
     </div>
+
+    <van-dialog v-model="dialogShow" title="加油卡重要提示" show-cancel-button cancelButtonText="不同意"
+      confirmButtonText="同意" @confirm="confirm">
+      <appointment-dialog></appointment-dialog> 
+    </van-dialog>
   </com-page>
 </template>
 
@@ -55,8 +61,12 @@
 import { checkStr, paramsValidate } from '@/utils/typeUtil'
 import validator from "@/utils/validator.js"
 import { cardAppointment } from '@/service/oilcard.js'
-import { Toast } from 'vant'
+import { Toast, Dialog } from 'vant'
+import AppointmentDialog from './appointment-dialog.vue'
 export default {
+  components: {
+    AppointmentDialog
+  },
   data() {
     return {
       validator: undefined,  //验证对象
@@ -104,6 +114,7 @@ export default {
       },
       show: false,
       isSubmit: true,
+      dialogShow: false
     };
   },
 
@@ -130,6 +141,9 @@ export default {
       this.show = false
     },
     submit () {
+      this.dialogShow = true
+    },
+    confirm () {  //确认
       this.validate(error => {
 				if (!error) {
 					this.cardAppointment()
@@ -189,6 +203,9 @@ export default {
           duration: 1500
         })
       }
+    },
+    querySubmit () {
+      this.$router.push('/service/appointment-query')
     }
   }
 };
@@ -196,10 +213,20 @@ export default {
 <style lang="scss">
   .appointment {
     &_agreement {
-      padding: 10px;
+      padding: 20px;
     }
-    .submit_buttons {
-      margin-top: -20px !important;
+    .submit_buttons1 {
+      display: flex;
+      padding: 0 14.5px;
+      &__apply {
+        width: 173px;
+        height: 52px;
+        margin-right: 14.5px;
+      }
+      &__query {
+        width: 173px;
+        height: 52px;
+      }
     }
   }
 </style>

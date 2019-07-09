@@ -22,6 +22,8 @@ FastClick.attach(document.body);
 
 import { Lazyload } from 'vant';
 Vue.use(Lazyload);
+import { Dialog } from 'vant';
+Vue.use(Dialog);
 
 Vue.use(Vuex)
 Vue.use(router)

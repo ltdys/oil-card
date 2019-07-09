@@ -26,7 +26,8 @@ import {
   Picker,
   CouponCell,
   CouponList,
-  Checkbox, CheckboxGroup
+  Checkbox, CheckboxGroup,
+  Dialog
 } from 'vant'
 
 const components = [
@@ -55,7 +56,8 @@ const components = [
   Picker,
   CouponCell,
   CouponList,
-  Checkbox, CheckboxGroup
+  Checkbox, CheckboxGroup,
+  Dialog
 ]
 
 const install = function (Vue) {
