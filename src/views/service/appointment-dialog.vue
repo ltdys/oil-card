@@ -35,9 +35,11 @@ export default {
 
 <style lang="scss">
   .appointment-dialog {
-    line-height: 25px;
+    line-height: 20px;
     color: #222;
     font-size: 14px;
+    overflow-y: scroll;
+    margin-top: 10px;
     div {
       padding-right: 8px;
       padding-left: 8px;

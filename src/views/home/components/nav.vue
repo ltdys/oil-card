@@ -21,7 +21,8 @@ export default {
         path: '/service/binding'
       }, {
         img: 'static/images/icon/recharge.png',
-        text: '油卡充值',
+        text: '充值凭证',
+        // text: '油卡充值',
         path: '/service/recharge'
       }, {
         img: 'static/images/icon/loss_report.png',
@@ -29,8 +30,10 @@ export default {
         path: '/service/loss_report'
       }, {
         img: 'static/images/icon/withdraw.png',
-        text: '申请退卡',
-        path: '/service/withdraw'
+        // text: '申请退卡',
+        // path: '/service/withdraw'
+        text: '商务合作',
+        path: '/service/business'
       }, {
         img: 'static/images/icon/problem.png',
         text: '常见问题',

@@ -35,21 +35,21 @@ export default {
           text: '个人信息',
           path: '/my/info'
         }, {
-          img: 'static/images/icon/safety.png',
-          text: '实名认证',
-          path: '/my/safety'
-        }, {
           img: 'static/images/icon/wallet.png',
           text: '我的油卡',
           path: '/my/oil_card'
         }, {
+          img: 'static/images/icon/rq_code.png',
+          text: '我的余额',
+          path: '/my/balance'
+        }, {
+          img: 'static/images/icon/safety.png',
+          text: '实名认证',
+          path: '/my/safety'
+        }, {
           img: 'static/images/icon/record.png',
           text: '油卡充值',
           path: '/service/recharge'
-        }, {
-          img: 'static/images/icon/rq_code.png',
-          text: '我的订单',
-          path: '/my/my_order'
         }, {
           img: 'static/images/icon/coupon.png',
           text: '我的优惠劵',
@@ -60,12 +60,16 @@ export default {
           path: '/my/sys_setting'
         }, {
           img: 'static/images/icon/collect.png',
-          text: '客服',
+          text: '我的客服',
           path: '/my/service'
         }, {
           img: 'static/images/icon/integral.png',
           text: '商城',
           path: '/my/shopping'
+        }, {
+          img: 'static/images/icon/integral.png',
+          text: '关于我们',
+          path: '/my/aboutme'
         }
       ]
     }
@@ -120,7 +124,7 @@ export default {
   &_serve{
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     flex-wrap: wrap;
     border-left: 1px solid #eee;
     border-top: 1px solid #eee;

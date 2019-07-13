@@ -50,7 +50,7 @@
       <van-button type="primary" @click="querySubmit" class="submit_buttons1__query">申请查询</van-button>
     </div>
 
-    <van-dialog v-model="dialogShow" title="加油卡重要提示" show-cancel-button cancelButtonText="不同意"
+    <van-dialog v-model="dialogShow" title="协议" show-cancel-button cancelButtonText="不同意"
       confirmButtonText="同意" @confirm="confirm">
       <appointment-dialog></appointment-dialog> 
     </van-dialog>

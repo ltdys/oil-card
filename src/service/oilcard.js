@@ -65,3 +65,12 @@ export const cardReject = params => axios.post('/UserMs/cardReject.do', params)
 
 //退出登录
 export const uLogout = params => axios.post('/UserMs/uLogout.do', params)
+
+// 油卡余额查询
+export const getConsChaList = params => axios.post('/UserMs/getConsChaList.do', params)
+
+// 凭证提交记录查询
+export const getHQPayList = params => axios.post('/UserMs/getHQPayList.do', params)
+
+// 查询用户关联的油卡数量，总金额/总余额
+export const queryRelationCardInfo = params => axios.post('/UserMs/queryRelationCardInfo.do', params)

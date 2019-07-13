@@ -121,6 +121,22 @@ export const routes = [{
     }
   },
   {
+    path: '/my/aboutme', //关于我们
+    component: () => import('@/views/my/aboutme.vue'),
+    meta: {
+      index: 20,
+      requireAuth: true
+    }
+  },
+  {
+    path: '/my/balance', //油卡余额
+    component: () => import('@/views/my/balance.vue'),
+    meta: {
+      index: 20,
+      requireAuth: true
+    }
+  },
+  {
     path: '/my/shopping', //商城
     component: () => import('@/views/my/shopping.vue'),
     meta: {
@@ -203,6 +219,14 @@ export const routes = [{
   {
     path: '/service/withdraw', //申请退卡
     component: () => import('@/views/service/withdraw.vue'),
+    meta: {
+      index: 10,
+      requireAuth: true
+    }
+  },
+  {
+    path: '/service/business', //商务合作
+    component: () => import('@/views/service/business.vue'),
     meta: {
       index: 10,
       requireAuth: true

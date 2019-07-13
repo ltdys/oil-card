@@ -23,6 +23,10 @@ const vFilter = {
     if (!value) { value = 0 }
     return parseFloat(value).toFixed(2)
   },
+  vFixedOne: value => {
+    if (!value) { value = 0 }
+    return parseFloat(value).toFixed(1)
+  },
   vUpperCase: value => { //转化大写
     if (!value) { value = '暂无' }
     return value.toUpperCase()
@@ -40,6 +44,38 @@ const vFilter = {
     let perfix = Vue.prototype.HEAD_IMAGE_PR
     return value.indexOf(perfix) != -1 ? value : perfix + value
   },
+  vIsAgree: value => { // 审核状态
+    if (value == '0') {
+      value = '审核中'
+    } else if (value == '1') {
+      value = '审核通过'
+    } else {
+      value = '审核被拒'
+    }
+    return value
+  },
+  vPayType: value => {
+    if (value == '1') {
+      value = '支付宝'
+    } else if (value == '2') {
+      value = '微信支付'
+    } else if (value == '2') {
+      value = '银联支付'
+    } else {
+      value = '线下转帐'
+    }
+    return value
+  },
+  vStatus: value => {
+    if (value == '0') {
+      value = '[审核中]'
+    } else if (value == '1') {
+      value = '[审核通过]'
+    } else {
+      value = '[未审核通过]'
+    }
+    return value
+  }
 }
 
 export default vFilter
