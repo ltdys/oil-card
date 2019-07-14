@@ -17,6 +17,12 @@
       placeholder="填写本人的身份证号"
       :error-message="errorMsg.IDCord">
     </van-field>
+    <van-field
+      label="行驶证号"
+      v-model="safetyInfo.carNo"
+      clearable
+      placeholder="输入行驶证号">
+    </van-field>
     <van-cell title="证件照片" class="zjzp-cell">
       <van-uploader :after-read="frontImg" accept="image/gif, image/jpeg, image/png">
         <div class="zjzp-cell_box" v-if="safetyInfo.IDfront == ''">
@@ -33,6 +39,14 @@
           <div class="zjzp-cell_text">身份证反面照片</div>
         </div>
         <img class="zjzp-cell_img" v-else :src="safetyInfo.IDverso | vAddPerfix" alt="">
+      </van-uploader>
+      <van-uploader :after-read="drivingImg" accept="image/gif, image/jpeg, image/png">
+        <div @click="updataImg('3')" class="zjzp-cell_box" v-if="safetyInfo.IDdriving == ''">
+          <!-- <img class="zjzp-cell_icon" src="static/images/icon/add_icon.png" alt=""> -->
+          <van-icon class="zjzp-cell_icon" size="38px" name="plus" />
+          <div class="zjzp-cell_text">行驶证照片</div>
+        </div>
+        <img class="zjzp-cell_img" v-else :src="safetyInfo.IDdriving | vAddPerfix" alt="">
       </van-uploader>
     </van-cell>
     <div class="mysafety_toast">
@@ -60,6 +74,8 @@ export default {
         IDCord: '', //身份证号
         IDfront: '', //身份证正面照
         IDverso: '', //身份证反面照
+        carNo: '',  // 行驶证号
+        IDdriving:''  // 行驶证照
       },
       isBtnShow: true, //确认按钮显示状态
     };
@@ -83,6 +99,8 @@ export default {
     this.safetyInfo.IDCord = this.userInfo.idCard || ''
     this.safetyInfo.IDfront = this.userInfo.idCardImage || ''
     this.safetyInfo.IDverso = this.userInfo.idCardBackImage || ''
+    this.safetyInfo.IDdriving = this.userInfo.carImage || ''
+    this.safetyInfo.carNo = this.userInfo.carNo
     this.validator = validator(this.rules, this.safetyInfo)
   },
   updated () {
@@ -135,6 +153,26 @@ export default {
         self.upLoadImg(form, '2')
       }
     },
+    drivingImg (file) { //证件照片,行驶证
+      let self = this;
+      if(/\/(?:jpeg|png)/i.test(file.file.type) && file.file.size > 102400) {
+        let canvas =  document.createElement('canvas')  
+        let context = canvas.getContext('2d') 
+        let img = new Image()
+        img.src = file.content
+        img.onload = () => {
+          canvas.width = 300
+          canvas.height = 300
+          context.drawImage(img, 0, 0, 300, 300)
+          file.content = canvas.toDataURL(file.file.type, 0.92) 
+          let form = imgChangeForm(file.content)
+          self.upLoadImg(form, '3')
+        }                       
+      }else{
+        let form = imgChangeForm(file.content)
+        self.upLoadImg(form, '3')
+      }
+    },
     confireBtn () { //确认提交按钮事件
       let self = this;
       self.validate(error => {
@@ -150,7 +188,9 @@ export default {
         idName: self.safetyInfo.realname,
         idCard: self.safetyInfo.IDCord,
         idCardImage: self.safetyInfo.IDfront,
-        idCardBackImage: self.safetyInfo.IDverso
+        idCardBackImage: self.safetyInfo.IDverso,
+        carNo: self.safetyInfo.carNo,
+        carImage: self.safetyInfo.IDdriving
       }
       let resData = await uUpdateUserInfo(param)
       console.log('resData',resData)
@@ -191,6 +231,8 @@ export default {
           self.safetyInfo.IDfront = safetyImage
         } else if (key === '2') {
           self.safetyInfo.IDverso = safetyImage
+        } else if (key === '3') {
+          self.safetyInfo.IDdriving = safetyImage
         }
       })
       .catch(err => {
