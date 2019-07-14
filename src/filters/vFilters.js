@@ -75,6 +75,32 @@ const vFilter = {
       value = '[未审核通过]'
     }
     return value
+  },
+  vCardStatus: value => {  // 我的油卡状态
+    switch (value) {
+      case 0: 
+        value = '未激活'
+        break;
+      case 1:
+        value = '未使用'
+        break;
+      case 2: 
+        value = '正常'
+        break;
+      case 3:
+        value = '挂失'
+        break;
+      case 4: 
+        value = '异常卡'
+        break;
+      case 5:
+        value = '其它'
+        break;
+      default: 
+        value = '其它'
+        break
+    }
+    return value
   }
 }
 

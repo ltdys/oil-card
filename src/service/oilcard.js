@@ -74,3 +74,6 @@ export const getHQPayList = params => axios.post('/UserMs/getHQPayList.do', para
 
 // 查询用户关联的油卡数量，总金额/总余额
 export const queryRelationCardInfo = params => axios.post('/UserMs/queryRelationCardInfo.do', params)
+
+// 查询用户关联的油卡列表
+export const queryRelationCardList = params => axios.post('/UserMs/queryRelationCardList.do', params)
